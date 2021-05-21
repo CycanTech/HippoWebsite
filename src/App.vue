@@ -1,26 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="hippo-app">
+    <MHeader />
+    <div class="hippo-app-content">
+      <router-view />
+    </div>
+    <MFooter />
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import MHeader from './components/m-header/m-header.vue'
+import MFooter from './components/m-footer/m-footer.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MHeader,
+    MFooter
+  },
+  created() {
+    console.log((this as any).$router)
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss" scoped>
+.hippo-app {
+  position: relative;
+  padding-top: 64px;
 }
 </style>
