@@ -6,7 +6,7 @@ import ElementLocale from 'element-plus/lib/locale'
 import en from '../i18n/en.json'
 import zh from '../i18n/zh.json'
 import { LOCALES, LOCALES_ROUTER } from '../i18n/index'
-import { getCurrentLang } from '../common/ts/utils'
+import { getCurrentLang } from '../i18n/index'
 
 const messages = {
   [LOCALES.EN]: {

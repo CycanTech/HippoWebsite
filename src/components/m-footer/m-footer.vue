@@ -5,11 +5,14 @@
         <img :src="item.img" />
       </a>
     </div>
-    <div class="lang"></div>
+    <div class="lang">
+      <lang />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import Lang from '../lang/lang.vue'
 import { ref } from 'vue'
 const LINKS = [
   {
@@ -30,6 +33,9 @@ const LINKS = [
   }
 ]
 export default {
+  components: {
+    Lang
+  },
   setup() {
     const links = ref(LINKS)
     return {

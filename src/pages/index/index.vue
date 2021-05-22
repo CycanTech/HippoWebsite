@@ -24,7 +24,7 @@
                 ></div>
               </div>
               <div class="check-whitelist">
-                <el-button class="check-whitelist" type="primary" round>
+                <el-button class="check-whitelist" @click="changeModelDisplay" type="primary" round>
                   {{ $t('message.index.activity.checkWhitelist') }}
                 </el-button>
               </div>
@@ -59,11 +59,15 @@
         </div>
       </div>
     </div>
+    <popup v-model="showModel">
+      <div class="model-wrapper">哈哈哈</div>
+    </popup>
   </div>
 </template>
 
 <script lang="ts">
 import { reactive, ref } from 'vue'
+import Popup from '../../components/popup/popup.vue'
 import { LOCALES } from '../../i18n/index'
 
 const TABS = [
@@ -78,12 +82,23 @@ const TABS = [
 ]
 
 export default {
+  components: { Popup },
   setup() {
     const tabs = reactive<Array<any>>(TABS)
     const searchAddress = ref<string>('')
+    const showModel = ref(false)
+
+    const changeModelDisplay = () => {
+      showModel.value = !showModel.value
+    }
+
     return {
       tabs,
       searchAddress,
+
+      showModel,
+      changeModelDisplay,
+
       LOCALES,
       tableData: []
     }
@@ -105,8 +120,8 @@ export default {
       padding-top: 80px;
       padding-bottom: 55px;
     }
-    .info {
-    }
+    // .info {
+    // }
     .activity {
       .el-tabs--border-card > .el-tabs__header {
         background-color: #f2f7fa;
@@ -145,6 +160,11 @@ export default {
         padding: 50px 0;
       }
     }
+  }
+  .model-wrapper {
+    height: 400px;
+    width: 400px;
+    background: #fff;
   }
 }
 </style>

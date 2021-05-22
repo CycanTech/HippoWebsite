@@ -3,10 +3,10 @@
     <div class="m-header">
       <img class="avatar" src="./avatar.png" />
       <div class="navs">
-        <div class="nav"></div>
-        <div class="nav"></div>
-        <div class="nav"></div>
-        <div class="nav"></div>
+        <div class="nav">{{ $t('message.header.menu.desc') }}</div>
+        <div class="nav">{{ $t('message.header.menu.airdrop') }}</div>
+        <div class="nav">{{ $t('message.header.menu.rank') }}</div>
+        <div class="nav">{{ $t('message.header.menu.contact') }}</div>
       </div>
     </div>
   </div>

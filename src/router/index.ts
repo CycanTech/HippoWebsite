@@ -1,9 +1,9 @@
 import Index from '../pages/index/index.vue'
 import Home from '../pages/home/home.vue'
 import { ROUTER_LOCALES, LOCALES } from '../i18n/index'
-import { getCurrentLang } from '../common/ts/utils'
+import { getCurrentLang } from '../i18n/index'
 
-const pages = [{ name: 'Index', path: '', component: Index }]
+const pages = [{ path: '', component: Index }]
 
 export default [
   {
@@ -14,12 +14,12 @@ export default [
     }
   },
   {
-    path: `/${ROUTER_LOCALES[LOCALES.EN]}`,
+    path: `/${ROUTER_LOCALES[LOCALES.ZH]}`,
     component: Home,
-    children: pages,
+    children: ([] as any).concat(pages)
   },
   {
-    path: `/${ROUTER_LOCALES[LOCALES.ZH]}`,
+    path: `/${ROUTER_LOCALES[LOCALES.EN]}`,
     component: Home,
     children: pages
   }
