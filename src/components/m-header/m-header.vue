@@ -1,55 +1,140 @@
 <template>
-  <div class="m-header-wrapper" :class="{ 'is-sticky': scrollY > HEADER_HEIGHT }">
+  <header class="m-header-wrapper" :class="{ 'is-sticky': scrollY > HEADER_HEIGHT }">
     <div class="m-header">
       <img class="avatar" src="./avatar.png" />
       <div class="navs">
-        <div class="nav">{{ $t('message.header.menu.desc') }}</div>
-        <div class="nav">{{ $t('message.header.menu.airdrop') }}</div>
-        <div class="nav">{{ $t('message.header.menu.rank') }}</div>
-        <div class="nav">{{ $t('message.header.menu.contact') }}</div>
+        <div class="nav" @click="scrollToControl('desc')">
+          {{ $t('message.header.menu.desc') }}
+        </div>
+        <div class="nav" @click="scrollToControl('activity')">
+          {{ $t('message.header.menu.airdrop') }}
+        </div>
+        <div class="nav" @click="scrollToControl('rank')">
+          {{ $t('message.header.menu.rank') }}
+        </div>
+        <div class="nav">
+          {{ $t('message.header.menu.contact') }}
+        </div>
+      </div>
+      <div class="menu-button">
+        <el-button type="primary" @click="changeModelDisplay">
+          MENU
+          <i class="el-icon-s-operation el-icon-s-unfold"></i>
+        </el-button>
       </div>
     </div>
-  </div>
+    <popup v-model="showModel" :append-to-body="true" position="right">
+      <div class="m-hader-model-wrapper">
+        <div class="top">
+          <div class="avatar">
+            <img class="avatar" src="./avatar.png" />
+          </div>
+          <i class="el-icon-close" @click="changeModelDisplay"></i>
+        </div>
+        <div class="navs">
+          <div class="nav" @click="scrollToControl('desc')">
+            {{ $t('message.header.menu.desc') }}
+          </div>
+          <div class="nav" @click="scrollToControl('activity')">
+            {{ $t('message.header.menu.airdrop') }}
+          </div>
+          <div class="nav" @click="scrollToControl('rank')">
+            {{ $t('message.header.menu.rank') }}
+          </div>
+          <div class="nav">
+            {{ $t('message.header.menu.contact') }}
+          </div>
+        </div>
+      </div>
+    </popup>
+  </header>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
+import { getElementPosition, sleep } from '../../common/ts/utils'
+import Popup from '../popup/popup.vue'
 
 const EVENT_SCROLL = 'scroll'
 const HEADER_HEIGHT = 64
 
-export default {
+export default defineComponent({
+  components: {
+    Popup
+  },
   setup() {
     const scrollY = useScrollY()
+
+    const showModel = ref(false)
+    const changeModelDisplay = () => {
+      showModel.value = !showModel.value
+    }
+
+    const scrollToControl = async (id: string) => {
+      if (showModel.value) {
+        showModel.value = false
+        await sleep(300)
+      }
+      const { y } = getElementPosition(id)
+      document.body.scrollTop = y ? y - HEADER_HEIGHT : 0
+    }
+
     return {
       scrollY,
+      showModel,
+      changeModelDisplay,
+      scrollToControl,
       HEADER_HEIGHT
     }
   }
-}
+})
 
 const useScrollY = () => {
   const scrollY = ref<number>(0)
-  document.addEventListener(EVENT_SCROLL, () => {
-    const scrollTop: number = document.documentElement.scrollTop
+  document.body.addEventListener(EVENT_SCROLL, () => {
+    const scrollTop: number = document.body.scrollTop
     scrollY.value = scrollTop
   })
   return scrollY
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../scss/variable.scss';
+@import '../../scss/mixin.scss';
+.m-hader-model-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background: #fff;
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    .el-icon-close {
+      font-size: 50px;
+      color: $color-theme;
+      cursor: pointer;
+    }
+  }
+  .navs {
+    .nav {
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}
 .m-header-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 64px;
-  padding: 0 15%;
   background: $color-background-white;
+  border-bottom: 1px solid #f1f2f4;
   &.is-sticky {
     position: fixed;
-    top: 0;
     z-index: 9999;
     animation: sticky 1s;
   }
@@ -66,6 +151,45 @@ const useScrollY = () => {
     justify-content: space-between;
     align-items: center;
     height: 64px;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 50px;
+    .navs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: $font-size-medium-x;
+      font-weight: bold;
+      color: $color-theme;
+      width: 500px;
+      .nav {
+        cursor: pointer;
+      }
+    }
+    .menu-button {
+      display: none;
+    }
+  }
+  @include tablet {
+    .m-header {
+      .navs {
+        display: none;
+      }
+      .menu-button {
+        display: block;
+      }
+    }
+  }
+  @include mobile {
+    .m-header {
+      padding: 0 17px;
+      .navs {
+        display: none;
+      }
+      .menu-button {
+        display: block;
+      }
+    }
   }
 }
 </style>

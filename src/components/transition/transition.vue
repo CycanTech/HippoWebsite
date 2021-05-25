@@ -21,7 +21,7 @@ export default {
 }
 
 .m-zoom {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     opacity: 0.01;
     transform: scale(0.75);
@@ -35,7 +35,7 @@ export default {
 }
 
 .m-punch {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     opacity: 0.01;
     transform: scale(1.35);
@@ -49,7 +49,7 @@ export default {
 }
 
 .m-slide-up {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     transform: translate3d(0, 100%, 0);
   }
@@ -62,7 +62,7 @@ export default {
 }
 
 .m-slide-right {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     transform: translate3d(-100%, 0, 0);
   }
@@ -74,7 +74,7 @@ export default {
   }
 }
 .m-slide-left {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     transform: translate3d(100%, 0, 0);
   }
@@ -87,7 +87,7 @@ export default {
 }
 
 .m-slide-down {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     transform: translate3d(0, -100%, 0);
   }
@@ -100,7 +100,7 @@ export default {
 }
 
 .m-fade {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     opacity: 0.01;
   }
@@ -113,7 +113,7 @@ export default {
 }
 
 .m-fade-up {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     opacity: 0.01;
     transform: translate3d(0, 20%, 0);
@@ -127,7 +127,7 @@ export default {
 }
 
 .m-fade-down {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     opacity: 0.01;
     transform: translate3d(0, -20%, 0);
@@ -141,7 +141,7 @@ export default {
 }
 
 .m-fade-right {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     opacity: 0.01 transform translate3d(-20%, 0, 0);
   }
@@ -154,7 +154,7 @@ export default {
 }
 
 .m-fade-left {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     opacity: 0.01;
     transform: translate3d(20%, 0, 0);

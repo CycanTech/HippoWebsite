@@ -1,5 +1,14 @@
 import { App } from 'vue'
-import { ElButton, ElTabs, ElTabPane, ElInput, ElTable, ElTableColumn, ElPagination } from 'element-plus'
+import {
+  ElButton,
+  ElTabs,
+  ElTabPane,
+  ElInput,
+  ElTable,
+  ElTableColumn,
+  ElPagination,
+  ElPopover
+} from 'element-plus'
 
 export default (app: App) => {
   app.use(ElButton)
@@ -9,4 +18,5 @@ export default (app: App) => {
   app.use(ElTable)
   app.use(ElTableColumn)
   app.use(ElPagination)
+  app.use(ElPopover)
 }

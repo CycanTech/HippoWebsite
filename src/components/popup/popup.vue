@@ -5,7 +5,11 @@
     :class="[hasMask ? 'with-mask' : '', largeRadius ? 'large-radius' : '', position]"
   >
     <transition name="m-mask-fade">
-      <div v-show="hasMask && isPopupBoxShow" @click="handelPopupMaskClick" class="m-popup-mask"></div>
+      <div
+        v-show="hasMask && isPopupBoxShow"
+        @click="handelPopupMaskClick"
+        class="m-popup-mask"
+      ></div>
     </transition>
     <m-transition
       :name="transitionType"
@@ -22,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRefs, watch, onMounted, getCurrentInstance, Ref } from 'vue'
+import { defineComponent, ref, toRefs, watch, getCurrentInstance, Ref } from 'vue'
 import Transition from '../transition/transition.vue'
 import props from './props'
 
@@ -33,6 +37,7 @@ interface Props {
   modelValue: boolean
   hasMask: boolean
   maskClosable: boolean
+  appendToBody: boolean
 }
 
 export default defineComponent({
@@ -43,9 +48,26 @@ export default defineComponent({
   props: {
     ...props
   },
-  emits: ['update:modelValue', 'beforeHide', 'before-hide', 'beforeShow', 'before-show', 'show', 'hide', 'maskClick'],
+  emits: [
+    'update:modelValue',
+    'beforeHide',
+    'before-hide',
+    'beforeShow',
+    'before-show',
+    'show',
+    'hide',
+    'maskClick'
+  ],
   setup(props: Props, { emit }) {
-    const { modelValue, preventScroll, maskClosable, position, transition, hasMask } = toRefs(props)
+    const {
+      modelValue,
+      preventScroll,
+      maskClosable,
+      position,
+      transition,
+      hasMask,
+      appendToBody
+    } = toRefs(props)
 
     const transitionType = useTransition(position, transition)
 
@@ -69,11 +91,14 @@ export default defineComponent({
         hidePopupBox()
       }
     })
-    // MARK: private methods
+
     const showPopupBox = () => {
+      if (appendToBody.value) {
+        const el = instanc?.proxy?.$el
+        document.body.appendChild(el)
+      }
       isPopupShow.value = true
       isAnimation.value = true
-      // popup box enter the animation after popup show
       isPopupBoxShow.value = true
       if (process.env.MAND_ENV === 'test') {
         handelPopupTransitionStart()
@@ -87,7 +112,6 @@ export default defineComponent({
       isPopupBoxShow.value = false
       preventScroll.value && preventScrollEvent(false)
       emit('update:modelValue', false)
-      /* istanbul ignore if */
       if (process.env.MAND_ENV === 'test') {
         handelPopupTransitionStart()
         handelPopupTransitionEnd()
@@ -100,13 +124,13 @@ export default defineComponent({
       const masker = el.querySelector('.m-popup-mask')
       const boxer = el.querySelector('.m-popup-box')
 
-      masker && masker[handler]('touchmove', $_preventDefault, false)
-      boxer && boxer[handler]('touchmove', $_preventDefault, false)
-      masker && masker[handler]('scroll', $_preventDefault, false)
-      boxer && boxer[handler]('scroll', $_preventDefault, false)
+      masker && masker[handler]('touchmove', preventDefault, false)
+      boxer && boxer[handler]('touchmove', preventDefault, false)
+      masker && masker[handler]('scroll', preventDefault, false)
+      boxer && boxer[handler]('scroll', preventDefault, false)
     }
 
-    const $_preventDefault = (event: Event) => {
+    const preventDefault = (event: Event) => {
       event.preventDefault()
     }
 
@@ -126,7 +150,6 @@ export default defineComponent({
       }
 
       if (!isPopupBoxShow.value) {
-        // popup hide after popup box finish animation
         isPopupShow.value = false
         emit('hide')
       } else {
@@ -142,10 +165,6 @@ export default defineComponent({
         emit('maskClick')
       }
     }
-
-    onMounted(() => {
-      modelValue.value && showPopupBox()
-    })
 
     return {
       isPopupShow,

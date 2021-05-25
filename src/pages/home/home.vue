@@ -1,5 +1,5 @@
 <template>
-  <div class="hippo-app">
+  <div class="hippo-app-wrapper">
     <m-header />
     <div class="hippo-app-content">
       <router-view />
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.hippo-app {
+.hippo-app-wrapper {
   position: relative;
   padding-top: 64px;
 }

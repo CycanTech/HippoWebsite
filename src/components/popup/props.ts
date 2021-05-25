@@ -24,5 +24,10 @@ export default {
   maskClosable: {
     type: Boolean,
     default: true
+  },
+  appendToBody: {
+    default: () => {
+      return false
+    }
   }
 }

@@ -13,26 +13,12 @@
 
 <script lang="ts">
 import Lang from '../lang/lang.vue'
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 const LINKS = [
-  {
-    link: '',
-    img: require('./facebook.png')
-  },
-  {
-    link: '',
-    img: require('./cycan.png')
-  },
-  {
-    link: '',
-    img: require('./elp.png')
-  },
-  {
-    link: '',
-    img: require('./twitter.png')
-  }
+  { link: '', img: require('./telegram.png') },
+  { link: '', img: require('./twitter.png') }
 ]
-export default {
+export default defineComponent({
   components: {
     Lang
   },
@@ -42,11 +28,12 @@ export default {
       links
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
 @import '../../scss/variable.scss';
+@import '../../scss/mixin.scss';
 .m-footer {
   display: flex;
   align-items: center;
@@ -56,9 +43,22 @@ export default {
   padding: 0 20%;
   .links {
     img {
-      height: 50px;
-      width: 50px;
+      height: 49px;
+      width: 49px;
       margin-right: 10px;
+    }
+  }
+  @include mobile {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    .links {
+      margin-bottom: 30px;
+      img {
+        zoom: 0.6;
+        margin-right: 5px;
+      }
     }
   }
 }

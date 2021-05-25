@@ -1,8 +1,8 @@
 // 背景图片
 @mixin bg-image($url) {
-  background-image: url($url + '@2x.png');
+  background-image: url($url+'@2x.png');
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    background-image: url($url + '@3x.png');
+    background-image: url($url+'@3x.png');
   }
 }
 
@@ -37,3 +37,41 @@
     display: none; /* Chrome Safari */
   }
 }
+
+@mixin desktop {
+  @media screen and (min-width: 1199px) and (max-width: 1600px) {
+    @content;
+  }
+}
+
+@mixin smallDesktop {
+  @media screen and (min-width: 1025px) and (max-width: 1199px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin smallMobile {
+  @media only screen and (min-device-width: 300px) and (max-device-width: 320px) {
+    @content;
+  }
+}
+
+

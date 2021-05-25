@@ -16,7 +16,7 @@ export default [
   {
     path: `/${ROUTER_LOCALES[LOCALES.ZH]}`,
     component: Home,
-    children: ([] as any).concat(pages)
+    children: pages
   },
   {
     path: `/${ROUTER_LOCALES[LOCALES.EN]}`,

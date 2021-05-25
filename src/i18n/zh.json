@@ -10,10 +10,10 @@
   "index": {
     "info": {
       "title": "什么是HIPPO?",
-      "desc": "哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
+      "desc": "Hippo 信息 Hippo information 1. Hippo 无团队预留份额，100%给社区空投，激励和提供流动性池子，团队成员要获得 Hippo 也只能通过进电报群，关注，点赞转发空投推文并两位好友+附上 BSC 地址。 2. 持有 Hippo 可以不定期获得 ELP CYCAN ELC 空投，这个后续空投会随时在 Cycan 社区公布。"
     },
     "activity": {
-      "title": "什么是HIPPO?",
+      "title": "空投活动",
       "checkWhitelist": "查验白名单"
     },
     "rankHolders": {
@@ -25,6 +25,10 @@
       "getAirdrop": "获得空投",
       "totalHoldings": "总持有量",
       "ratio": "比率"
+    },
+    "checkWhitelistModel": {
+      "title": "输入地址查验白名单",
+      "check": "查验"
     }
   }
 }
