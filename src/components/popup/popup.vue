@@ -12,13 +12,13 @@
       ></div>
     </transition>
     <m-transition
-      :name="transitionType"
+      :name="transition"
       @before-enter="handelPopupTransitionStart"
       @before-leave="handelPopupTransitionStart"
       @after-enter="handelPopupTransitionEnd"
       @after-leave="handelPopupTransitionEnd"
     >
-      <div v-show="isPopupBoxShow" class="m-popup-box" :class="[transitionType]">
+      <div v-show="isPopupBoxShow" class="m-popup-box" :class="[transition]">
         <slot></slot>
       </div>
     </m-transition>
@@ -26,19 +26,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRefs, watch, getCurrentInstance, Ref } from 'vue'
+import { defineComponent, ref, toRefs, watch, getCurrentInstance } from 'vue'
 import Transition from '../transition/transition.vue'
-import props from './props'
-
-interface Props {
-  position: string
-  transition: string
-  preventScroll: boolean
-  modelValue: boolean
-  hasMask: boolean
-  maskClosable: boolean
-  appendToBody: boolean
-}
+import { props, Props } from './index'
 
 export default defineComponent({
   name: 'm-popup',
@@ -68,8 +58,6 @@ export default defineComponent({
       hasMask,
       appendToBody
     } = toRefs(props)
-
-    const transitionType = useTransition(position, transition)
 
     const isPopupShow = ref(false)
     const isPopupBoxShow = ref(false)
@@ -172,7 +160,7 @@ export default defineComponent({
       hasMask,
       largeRadius,
       position,
-      transitionType,
+      transition,
 
       handelPopupMaskClick,
       handelPopupTransitionStart,
@@ -180,27 +168,6 @@ export default defineComponent({
     }
   }
 })
-
-const useTransition = (position: Ref<string>, transition: Ref<string>): string => {
-  if (transition?.value) {
-    return transition.value
-  }
-
-  switch (position.value) {
-    case 'bottom':
-      return 'm-slide-up'
-    case 'top':
-      return 'm-slide-down'
-    case 'left':
-      return 'm-slide-right'
-    case 'right':
-      return 'm-slide-left'
-    case 'center':
-      return 'm-zoom'
-    default:
-      return 'm-fade' // fade/fade-bounce/fade-slide/fade-zoom
-  }
-}
 </script>
 
 <style lang="scss">

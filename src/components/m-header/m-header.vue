@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { ref, defineComponent, onUnmounted } from 'vue'
 import { getElementPosition, sleep } from '../../common/ts/utils'
 import Popup from '../popup/popup.vue'
 
@@ -91,10 +91,17 @@ export default defineComponent({
 
 const useScrollY = () => {
   const scrollY = ref<number>(0)
-  document.body.addEventListener(EVENT_SCROLL, () => {
-    const scrollTop: number = document.body.scrollTop
+
+  const handerScroll = (e: Event) => {
+    const scrollTop: number = (e.target as HTMLElement).scrollTop
     scrollY.value = scrollTop
+  }
+
+  document.body.addEventListener(EVENT_SCROLL, handerScroll)
+  onUnmounted(() => {
+    document.body.removeEventListener(EVENT_SCROLL, handerScroll)
   })
+
   return scrollY
 }
 </script>
