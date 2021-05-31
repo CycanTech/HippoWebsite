@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRefs, watch, getCurrentInstance } from 'vue'
+import { defineComponent, ref, toRefs, watch, getCurrentInstance, onMounted } from 'vue'
 import Transition from '../transition/transition.vue'
 import { props, Props } from './index'
 
@@ -65,6 +65,12 @@ export default defineComponent({
     const largeRadius = ref(false)
 
     const instanc = getCurrentInstance()
+
+    onMounted(() => {
+      if (modelValue.value) {
+        showPopupBox()
+      }
+    })
 
     watch(modelValue, val => {
       if (val) {
@@ -177,7 +183,7 @@ export default defineComponent({
   position: fixed;
   display: flex;
   pointer-events: none;
-  z-index: 99999;
+  z-index: 999;
   &.center {
     align-items: center;
     justify-content: center;
@@ -196,21 +202,18 @@ export default defineComponent({
       width: 100%;
     }
   }
-
   &.left {
     justify-content: flex-start;
     .m-popup-box {
       height: 100%;
     }
   }
-
   &.right {
     justify-content: flex-end;
     .m-popup-box {
       height: 100%;
     }
   }
-
   &.inner-popup .m-popup-box {
     background-color: #fff;
     border-radius: 8px 8px 0 0;
@@ -235,7 +238,7 @@ export default defineComponent({
   overflow: auto;
 }
 .m-mask-fade {
-  &-enter,
+  &-enter-from,
   &-leave-to {
     opacity: 0.01;
   }

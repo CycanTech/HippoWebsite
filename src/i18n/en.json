@@ -1,34 +1,45 @@
 {
   "header": {
     "menu": {
-      "desc": "HIPPO介绍",
-      "airdrop": "空投获取",
-      "rank": "持币人排名",
-      "contact": "联系我们"
+      "desc": "HIPPO",
+      "airdrop": "AirDrops",
+      "rank": "Holders",
+      "contact": "Contact"
     }
   },
   "index": {
     "info": {
-      "title": "什么是HIPPO?",
-      "desc": "Hippo 信息 Hippo information 1. Hippo 无团队预留份额，100%给社区空投，激励和提供流动性池子，团队成员要获得 Hippo 也只能通过进电报群，关注，点赞转发空投推文并两位好友+附上 BSC 地址。 2. 持有 Hippo 可以不定期获得 ELP CYCAN ELC 空投，这个后续空投会随时在 Cycan 社区公布。"
+      "title": "What is HIPPO?",
+      "desc": "Hippo (HIP) is a thorough decentralized community experiment initiated by the Cycan community. Our vision is to build a Decentralized Autonomous Organization（DAO） driven entirely by the community.<br/><br/>HIPPO is a lottery ticket and every day there is a chance to receive airdrops of various tokens in the Cycan ecosystem.<br/><br/>HIPPO is the governance token of the Cycan community and step-by-step, we will strive to achieve a true DAO by pure community governance.<br/><br/>HIPPO is a decentralized NFT market and will be burned for transaction fees.<br/><br/>HIPPO is a token distribution platform and according to the community’s preferences, suitable projects will be selected for airdrops or we can initiate an IDO in the community.<br/><br/>All rights of Hippo belong to the community and the future is determined by the community instead of a single person or organization, Hippo is filled with Possibilities.<br/><br/>Cycan Network is a decentralized cross-chain digital asset management platform, and will be complete infrastructures for DeFi and NFT. All the projects based on Cycan Network will be airdropped to HIPPO holders. ELP will be the first airdropped token.<br/><br/>Hippo Contract Address: <br />0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b <br />For Airdrop(700 bil):<br /> 0xa6f7f94c4ad4e1810e66a815c6a924d179d5b61b <br />For Initial Liquidity Provision（250 bil）：<br />0x9Dc0e376dAA55dF411A6F3Fe9dD384323008b908 <br />Incentives Part（50 bil）：<br />0xE722086775De1F045c5874e8accb0F923Ea4f23f <br /><br /> Website:<a href='https://www.cycan.network' target='_blank'> https://www.cycan.network </a><br />Telegram:<a href='https://t.me/cycan_network' target='_blank'> https://t.me/cycan_network</a>"
     },
     "activity": {
-      "title": "空投活动",
-      "checkWhitelist": "查验白名单"
+      "title": "AirDrops",
+      "checkClaim": "Check/Claim"
     },
     "rankHolders": {
-      "title": "持币人排名",
-      "search": "搜索",
-      "placeholder": "搜索地址",
-      "accountAddress": "账户地址",
-      "getTime": "获得时间",
-      "getAirdrop": "获得空投",
-      "totalHoldings": "总持有量",
-      "ratio": "比率"
+      "title": "Holders Ranking",
+      "search": "Search",
+      "placeholder": "Search for address",
+      "accountAddress": "Address",
+      "totalHoldings": "Amount",
+      "ratio": "Ratio"
     },
-    "checkWhitelistModel": {
-      "title": "输入地址查验白名单",
-      "check": "查验"
+    "checkClaimModel": {
+      "title": "Check/Claim",
+      "receiveAirdrop": "Claim",
+      "connectWallet": "Connect Wallet",
+      "tips": "Connect to wallet",
+      "result": "Result :",
+      "disconnect": "Disconnect",
+      "notAirdropped": "This address is not in the whitelist.",
+      "airdropped": "This address has claimed the airdrop.",
+      "inWhitelist": "This address is in the whitelist.",
+      "failedConnect": "Failed to connect to wallet.",
+      "tipsTitle": "There are 2 ways to get HIP:",
+      "tips01": "1. Go to ",
+      "tips02": " to exchange HIP-USDT",
+      "tips03": "2. Follow us on ",
+      "tips04": ", further airdrop info will be released before 30th June."
     }
   }
 }

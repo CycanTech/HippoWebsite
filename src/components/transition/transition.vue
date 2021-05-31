@@ -1,13 +1,13 @@
 <script>
-import { h, Transition } from 'vue'
+import { defineComponent, h, Transition } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'm-transition',
 
   render(proxy) {
     return h(Transition, proxy.$attrs, proxy.$slots)
   }
-}
+})
 </script>
 
 <style lang="scss">

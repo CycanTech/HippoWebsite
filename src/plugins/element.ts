@@ -9,6 +9,7 @@ import {
   ElPagination,
   ElPopover
 } from 'element-plus'
+import '../element-variables.scss'
 
 export default (app: App) => {
   app.use(ElButton)

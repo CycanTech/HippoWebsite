@@ -1,7 +1,9 @@
 <template>
   <header class="m-header-wrapper" :class="{ 'is-sticky': scrollY > HEADER_HEIGHT }">
     <div class="m-header">
-      <img class="avatar" src="./avatar.png" />
+      <div class="avatar">
+        <img src="./avatar.png" />
+      </div>
       <div class="navs">
         <div class="nav" @click="scrollToControl('desc')">
           {{ $t('message.header.menu.desc') }}
@@ -9,12 +11,12 @@
         <div class="nav" @click="scrollToControl('activity')">
           {{ $t('message.header.menu.airdrop') }}
         </div>
-        <div class="nav" @click="scrollToControl('rank')">
+        <!-- <div class="nav" @click="scrollToControl('rank')">
           {{ $t('message.header.menu.rank') }}
         </div>
         <div class="nav">
           {{ $t('message.header.menu.contact') }}
-        </div>
+        </div> -->
       </div>
       <div class="menu-button">
         <el-button type="primary" @click="changeModelDisplay">
@@ -27,7 +29,7 @@
       <div class="m-hader-model-wrapper">
         <div class="top">
           <div class="avatar">
-            <img class="avatar" src="./avatar.png" />
+            <img src="./avatar.png" />
           </div>
           <i class="el-icon-close" @click="changeModelDisplay"></i>
         </div>
@@ -38,12 +40,12 @@
           <div class="nav" @click="scrollToControl('activity')">
             {{ $t('message.header.menu.airdrop') }}
           </div>
-          <div class="nav" @click="scrollToControl('rank')">
+          <!-- <div class="nav" @click="scrollToControl('rank')">
             {{ $t('message.header.menu.rank') }}
           </div>
           <div class="nav">
             {{ $t('message.header.menu.contact') }}
-          </div>
+          </div> -->
         </div>
       </div>
     </popup>
@@ -117,6 +119,13 @@ const useScrollY = () => {
     align-items: center;
     justify-content: space-between;
     padding: 15px;
+    .avatar {
+      flex: 0 0 120px;
+      img {
+        width: 114px;
+        height: auto;
+      }
+    }
     .el-icon-close {
       font-size: 50px;
       color: $color-theme;
@@ -142,7 +151,7 @@ const useScrollY = () => {
   border-bottom: 1px solid #f1f2f4;
   &.is-sticky {
     position: fixed;
-    z-index: 9999;
+    z-index: 99;
     animation: sticky 1s;
   }
   @keyframes sticky {
@@ -161,6 +170,13 @@ const useScrollY = () => {
     max-width: 1024px;
     margin: 0 auto;
     padding: 0 50px;
+    .avatar {
+      flex: 0 0 120px;
+      img {
+        width: 114px;
+        height: auto;
+      }
+    }
     .navs {
       display: flex;
       align-items: center;
@@ -168,7 +184,7 @@ const useScrollY = () => {
       font-size: $font-size-medium-x;
       font-weight: bold;
       color: $color-theme;
-      width: 500px;
+      width: 230px;
       .nav {
         cursor: pointer;
       }

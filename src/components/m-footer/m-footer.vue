@@ -1,7 +1,7 @@
 <template>
   <div class="m-footer">
     <div class="links">
-      <a href="#" target="_blank" v-for="(item, index) in links" :key="index">
+      <a :href="item.link" target="_blank" v-for="(item, index) in links" :key="index">
         <img :src="item.img" />
       </a>
     </div>
@@ -15,8 +15,8 @@
 import Lang from '../lang/lang.vue'
 import { ref, defineComponent } from 'vue'
 const LINKS = [
-  { link: '', img: require('./telegram.png') },
-  { link: '', img: require('./twitter.png') }
+  { link: 'https://t.me/CycanNetwork', img: require('./telegram.png') },
+  { link: 'https://twitter.com/CycanNetwork', img: require('./twitter.png') }
 ]
 export default defineComponent({
   components: {
@@ -42,10 +42,14 @@ export default defineComponent({
   background: $color-theme;
   padding: 0 20%;
   .links {
-    img {
-      height: 49px;
-      width: 49px;
+    display: flex;
+    align-items: center;
+    a {
       margin-right: 10px;
+      img {
+        height: 49px;
+        width: 49px;
+      }
     }
   }
   @include mobile {
@@ -54,10 +58,16 @@ export default defineComponent({
     align-items: center;
     padding: 0;
     .links {
-      margin-bottom: 30px;
-      img {
-        zoom: 0.6;
-        margin-right: 5px;
+      margin-bottom: 20px;
+      a {
+        display: block;
+        margin-right: 15px;
+        &:last-child {
+          margin-right: 0;
+        }
+        img {
+          zoom: 0.8;
+        }
       }
     }
   }

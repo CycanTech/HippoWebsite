@@ -20,7 +20,7 @@ export const props = {
   transition: {
     type: String as PropType<TransitionType>,
     default(props: Props) {
-      switch (props.position as PositionType) {
+      switch (props.position) {
         case 'bottom':
           return 'm-slide-up'
         case 'top':

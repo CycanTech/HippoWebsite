@@ -2,7 +2,7 @@
 node_modules
 /dist
 dist*/
-
+/hippo_cycan_io
 
 # local env files
 .env.local
