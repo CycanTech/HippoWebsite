@@ -10,7 +10,7 @@
         </div>
         <div class="address-connect">
           <div class="account">
-            <span v-if="isConnected">{{ shortenAddress(userAccount, 9) }}</span>
+            <span v-if="isConnected">{{ shortenAddress(userAccount, 7) }}</span>
             <span class="tip" v-else> {{ $t('message.index.checkClaimModel.tips') }}</span>
           </div>
           <div class="connect">
