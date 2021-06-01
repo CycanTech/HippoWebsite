@@ -1,12 +1,14 @@
 <template>
-  <div class="m-footer">
-    <div class="links">
-      <a :href="item.link" target="_blank" v-for="(item, index) in links" :key="index">
-        <img :src="item.img" />
-      </a>
-    </div>
-    <div class="lang">
-      <lang />
+  <div class="m-footer-wrapper">
+    <div class="m-footer">
+      <div class="links">
+        <a :href="item.link" target="_blank" v-for="(item, index) in links" :key="index">
+          <img :src="item.img" />
+        </a>
+      </div>
+      <div class="lang">
+        <lang />
+      </div>
     </div>
   </div>
 </template>
@@ -34,39 +36,46 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import '../../scss/variable.scss';
 @import '../../scss/mixin.scss';
-.m-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.m-footer-wrapper {
   height: 200px;
   background: $color-theme;
-  padding: 0 20%;
-  .links {
+  .m-footer {
     display: flex;
     align-items: center;
-    a {
-      margin-right: 10px;
-      img {
-        height: 49px;
-        width: 49px;
+    justify-content: space-between;
+    height: 200px;
+    max-width: 1024px;
+    margin: 0 auto;
+    .links {
+      display: flex;
+      align-items: center;
+      a {
+        margin-right: 10px;
+        img {
+          height: 49px;
+          width: 49px;
+        }
       }
     }
-  }
-  @include mobile {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    .links {
-      margin-bottom: 20px;
-      a {
-        display: block;
-        margin-right: 15px;
-        &:last-child {
-          margin-right: 0;
-        }
-        img {
-          zoom: 0.8;
+    @include tablet{
+      padding: 0 40px;
+    }
+    @include mobile {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      .links {
+        margin-bottom: 20px;
+        a {
+          display: block;
+          margin-right: 15px;
+          &:last-child {
+            margin-right: 0;
+          }
+          img {
+            zoom: 0.8;
+          }
         }
       }
     }

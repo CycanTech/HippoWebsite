@@ -28,7 +28,7 @@
                 </div>
               </div>
               <div class="check-receive">
-                <el-button @click="handleShowAirdropModel" type="primary" round>
+                <el-button @click="handleShowAirdropModel" type="primary" size="medium" round>
                   {{ $t('message.index.activity.checkClaim') }}
                 </el-button>
               </div>
@@ -140,6 +140,9 @@ export default {
     .info {
       line-height: 25px;
       white-space: normal;
+      p {
+        word-break: break-all;
+      }
     }
     .activity-wrapper {
       padding-bottom: 20px;
@@ -178,6 +181,12 @@ export default {
           align-items: center;
           justify-content: center;
           margin-top: 20px;
+          .el-button {
+            width: 200px;
+            height: 60px;
+            border-radius: 60px;
+            font-size: 18px;
+          }
         }
       }
     }
@@ -242,7 +251,8 @@ export default {
               position: relative;
               padding-right: 0;
               img {
-                max-width: 100%;
+                max-width: 300px;
+                max-height: 310px;
                 margin: 0 auto;
               }
             }
