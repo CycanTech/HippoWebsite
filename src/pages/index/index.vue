@@ -36,36 +36,6 @@
           </el-tab-pane>
         </el-tabs>
       </div>
-      <!-- <div class="rank-holders" id="rank">
-        <h1>{{ $t('message.index.rankHolders.title') }}</h1>
-        <div class="search">
-          <el-input
-            clearable
-            :placeholder="$t('message.index.rankHolders.placeholder')"
-            v-model="searchRankAddress"
-          >
-            <template #append>
-              <el-button type="primary" round>
-                {{ $t('message.index.rankHolders.search') }}
-              </el-button>
-            </template>
-          </el-input>
-        </div>
-        <div class="table">
-          <el-table :data="tableData">
-            <el-table-column prop="date" :label="$t('message.index.rankHolders.accountAddress')">
-            </el-table-column>
-            <el-table-column prop="address" :label="$t('message.index.rankHolders.totalHoldings')">
-            </el-table-column>
-            <el-table-column prop="address" :label="$t('message.index.rankHolders.ratio')">
-            </el-table-column>
-          </el-table>
-          <div class="pagination">
-            <el-pagination background :pager-count="5" layout="prev, pager, next" :total="1000">
-            </el-pagination>
-          </div>
-        </div>
-      </div> -->
     </div>
     <airdrop-model ref="airdropModel" :projects="projects" />
   </div>
