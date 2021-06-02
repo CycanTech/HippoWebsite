@@ -73,13 +73,10 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, computed, PropType } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { ElMessage, ElLoading } from 'element-plus'
 import { shortenAddress } from '@/common/ts/utils'
 import Popup from '@/components/popup/popup.vue'
-// import checkUserInWhitelist from '@/service/checkUserInWhitelist'
-import { Project } from '@/service/getProjects'
-
 import Web3 from 'web3'
 import { AIRDROP_ADDRESS, HIPPO_ADDRESS, SPENDER_ADDRESS } from '@/common/ts/const'
 import airdrop from '@/abi/airdrop.json'
@@ -91,12 +88,6 @@ function getProvider(): any | undefined {
 }
 
 export default {
-  props: {
-    projects: {
-      type: Array as PropType<Project[]>,
-      default: () => []
-    }
-  },
   components: { Popup },
   setup() {
     const provider = getProvider()
@@ -106,33 +97,26 @@ export default {
       _watchAccountsChange()
     })
 
+    const _instantiateWeb3 = () => {
+      web3 = new Web3(provider)
+    }
     const _watchAccountsChange = () => {
       if (window.ethereum && window.ethereum.on) {
         window.ethereum.on('accountsChanged', async ([address]: string[]) => {
           userAccount.value = address
-          _instantiateWeb3()
-          await _handelCheckInWhitelist()
-          if (isInWhitelist.value) {
-            _getAirdropped()
-          }
+          _getUserInfo()
         })
       }
     }
-    const _handelCheckInWhitelist = async () => {
+    const _getUserInfo = async () => {
       const contract = new web3.eth.Contract(airdrop as any, AIRDROP_ADDRESS)
       isLoading.value = true
       isInWhitelist.value = await contract.methods.isWhitelist(userAccount.value).call()
+      if (isInWhitelist.value) {
+        isAirdropped.value = await contract.methods.isAirdropped(userAccount.value).call()
+      }
       isLoading.value = false
       isChecked.value = true
-    }
-    const _instantiateWeb3 = () => {
-      web3 = new Web3(provider)
-    }
-    const _getAirdropped = async () => {
-      const contract = new web3.eth.Contract(airdrop as any, AIRDROP_ADDRESS)
-      isLoading.value = true
-      isAirdropped.value = await contract.methods.isAirdropped(userAccount.value).call()
-      isLoading.value = false
     }
 
     const showModel = ref(false)
@@ -160,10 +144,7 @@ export default {
       isConnecting.value = false
       userAccount.value = address
       _instantiateWeb3()
-      await _handelCheckInWhitelist()
-      if (isInWhitelist.value) {
-        _getAirdropped()
-      }
+      _getUserInfo()
     }
     const onDisconnect = () => {
       userAccount.value = ''
@@ -183,7 +164,7 @@ export default {
         loading.close()
         if (error?.code !== 4001) {
           ElMessage.warning({
-            message: 'Receive airdrop failed',
+            message: 'Receive airdrop failed.',
             type: 'warning'
           })
           console.log('ReceiveAirdropTokenFrom Error', error)

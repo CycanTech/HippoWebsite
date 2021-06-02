@@ -1,10 +1,10 @@
-<script>
-import { defineComponent, h, Transition } from 'vue'
+<script lang="ts">
+import { defineComponent, h, Transition, Slots } from 'vue'
 
 export default defineComponent({
   name: 'm-transition',
 
-  render(proxy) {
+  render(proxy: { $attrs: any; $slots: Slots }) {
     return h(Transition, proxy.$attrs, proxy.$slots)
   }
 })
