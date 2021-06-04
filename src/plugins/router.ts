@@ -1,12 +1,12 @@
-import { App } from "vue";
-import { createRouter, createWebHashHistory } from "vue-router";
-import routes from "../router/index";
+import { App } from 'vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import routes from '../router/index'
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes,
-});
+  routes
+})
 
 export default (app: App) => {
-  app.use(router);
-};
+  app.use(router)
+}
