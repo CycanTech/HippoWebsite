@@ -46,7 +46,7 @@ export default {
   },
   watch: {
     $router() {
-      if (this.current != this.lang) {
+      if (this.current !== this.lang) {
         this.toggle(this.lang)
       }
     }

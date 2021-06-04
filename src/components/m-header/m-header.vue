@@ -17,6 +17,18 @@
         <div class="nav">
           {{ $t('message.header.menu.contact') }}
         </div> -->
+        <div class="nav">
+          <a
+            :href="
+              $i18n.locale === LOCALES.EN
+                ? '/whitepaper/HIPPOLitePaper.pdf'
+                : '/whitepaper/HIPPOLitePaperChinese.pdf'
+            "
+            target="_blank"
+          >
+            {{ $t('message.header.menu.whitepaper') }}
+          </a>
+        </div>
       </div>
       <div class="menu-button">
         <el-button type="primary" @click="changeModelDisplay">
@@ -46,6 +58,18 @@
           <div class="nav">
             {{ $t('message.header.menu.contact') }}
           </div> -->
+          <div class="nav">
+            <a
+              :href="
+                $i18n.locale === LOCALES.EN
+                  ? '/whitepaper/HIPPOLitePaper.pdf'
+                  : '/whitepaper/HIPPOLitePaperChinese.pdf'
+              "
+              target="_blank"
+            >
+              {{ $t('message.header.menu.whitepaper') }}
+            </a>
+          </div>
         </div>
       </div>
     </popup>
@@ -55,6 +79,7 @@
 <script lang="ts">
 import { ref, defineComponent, onUnmounted } from 'vue'
 import { getElementPosition, sleep } from '../../common/ts/utils'
+import { LOCALES } from '../../i18n/index'
 import Popup from '../popup/popup.vue'
 
 const EVENT_SCROLL = 'scroll'
@@ -86,7 +111,8 @@ export default defineComponent({
       showModel,
       changeModelDisplay,
       scrollToControl,
-      HEADER_HEIGHT
+      HEADER_HEIGHT,
+      LOCALES
     }
   }
 })
@@ -138,6 +164,9 @@ const useScrollY = () => {
       line-height: 100px;
       text-align: center;
       cursor: pointer;
+      a {
+        color: #000;
+      }
     }
   }
 }
@@ -187,6 +216,9 @@ const useScrollY = () => {
       width: 230px;
       .nav {
         cursor: pointer;
+        a {
+          color: $color-theme;
+        }
       }
     }
     .menu-button {
