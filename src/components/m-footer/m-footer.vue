@@ -25,8 +25,8 @@ import { LOCALES } from '../../i18n/index'
 const LINKS = [
   {
     links: {
-      EN: 'https://t.me/CycanGlobal',
-      ZH: 'https://t.me/cycan_network'
+      EN: 'https://t.me/cycan_network',
+      ZH: 'https://t.me/CycanGlobal'
     },
     img: require('./telegram.png')
   },
