@@ -2,7 +2,12 @@
   <div class="m-footer-wrapper">
     <div class="m-footer">
       <div class="links">
-        <a :href="item.link" target="_blank" v-for="(item, index) in links" :key="index">
+        <a
+          :href="$i18n.locale === LOCALES.EN ? item.links.EN : item.links.ZH"
+          target="_blank"
+          v-for="(item, index) in links"
+          :key="index"
+        >
           <img :src="item.img" />
         </a>
       </div>
@@ -16,9 +21,29 @@
 <script lang="ts">
 import Lang from '../lang/lang.vue'
 import { ref, defineComponent } from 'vue'
+import { LOCALES } from '../../i18n/index'
 const LINKS = [
-  { link: 'https://t.me/CycanNetwork', img: require('./telegram.png') },
-  { link: 'https://twitter.com/CycanNetwork', img: require('./twitter.png') }
+  {
+    links: {
+      EN: 'https://t.me/CycanGlobal',
+      ZH: 'https://t.me/cycan_network'
+    },
+    img: require('./telegram.png')
+  },
+  {
+    links: {
+      EN: 'https://twitter.com/CycanNetwork',
+      ZH: 'https://twitter.com/CycanNetwork'
+    },
+    img: require('./twitter.png')
+  },
+  {
+    links: {
+      EN: 'https://coinmarketcap.com/currencies/hippo-token/',
+      ZH: 'https://coinmarketcap.com/currencies/hippo-token/'
+    },
+    img: require('./coinmarketcap.png')
+  }
 ]
 export default defineComponent({
   components: {
@@ -27,7 +52,8 @@ export default defineComponent({
   setup() {
     const links = ref(LINKS)
     return {
-      links
+      links,
+      LOCALES
     }
   }
 })
@@ -57,7 +83,7 @@ export default defineComponent({
         }
       }
     }
-    @include tablet{
+    @include tablet {
       padding: 0 40px;
     }
     @include mobile {
