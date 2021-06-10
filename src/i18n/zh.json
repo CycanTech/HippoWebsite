@@ -16,7 +16,8 @@
     },
     "activity": {
       "title": "空投活动",
-      "checkClaim": "查验/领取"
+      "checkClaim": "查验/领取",
+      "airdropClaimEnded":"空投领取已截止"
     },
     "rankHolders": {
       "title": "持币人排名",
