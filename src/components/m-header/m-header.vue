@@ -29,6 +29,18 @@
             {{ $t('message.header.menu.whitepaper') }}
           </a>
         </div>
+        <div class="nav hippo-staking">
+          <a
+            :href="
+              $i18n.locale === LOCALES.EN
+                ? 'https://hipfarm.cycan.network/#/en/index'
+                : 'https://hipdefi.cycan.network/#/zh/index'
+            "
+            target="_blank"
+          >
+            {{ $t('message.header.menu.HIPPOStaking') }}
+          </a>
+        </div>
       </div>
       <div class="menu-button">
         <el-button type="primary" @click="changeModelDisplay">
@@ -68,6 +80,18 @@
               target="_blank"
             >
               {{ $t('message.header.menu.whitepaper') }}
+            </a>
+          </div>
+          <div class="nav hippo-staking">
+            <a
+              :href="
+                $i18n.locale === LOCALES.EN
+                  ? 'https://hipfarm.cycan.network/#/en/index'
+                  : 'https://hipdefi.cycan.network/#/zh/index'
+              "
+              target="_blank"
+            >
+              {{ $t('message.header.menu.HIPPOStaking') }}
             </a>
           </div>
         </div>
@@ -168,6 +192,19 @@ const useScrollY = () => {
         color: #000;
       }
     }
+    .hippo-staking {
+      a {
+        display: inline-block;
+        height: 38px;
+        line-height: 38px;
+        background: #7c70ec;
+        border-radius: 19px;
+        padding: 0 18px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #ffffff;
+      }
+    }
   }
 }
 .m-header-wrapper {
@@ -213,11 +250,25 @@ const useScrollY = () => {
       font-size: $font-size-medium-x;
       font-weight: bold;
       color: $color-theme;
-      width: 230px;
+      width: 400px;
       .nav {
         cursor: pointer;
+        height: 33px;
+        line-height: 33px;
         a {
           color: $color-theme;
+        }
+      }
+      .hippo-staking {
+        a {
+          display: block;
+          height: 33px;
+          background: #7c70ec;
+          border-radius: 17px;
+          padding: 0 18px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #ffffff;
         }
       }
     }
