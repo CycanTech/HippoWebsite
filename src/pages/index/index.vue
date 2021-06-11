@@ -28,8 +28,8 @@
                 </div>
               </div>
               <div class="check-receive">
-                <el-button @click="handleShowAirdropModel" type="primary" size="medium" round>
-                  {{ $t('message.index.activity.checkClaim') }}
+                <el-button @click="handleShowAirdropModel" type="primary" size="medium" round :disabled="true">
+                  {{ $t('message.index.activity.airdropClaimEnded') }}
                 </el-button>
               </div>
             </div>

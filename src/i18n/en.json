@@ -5,7 +5,8 @@
       "airdrop": "AirDrops",
       "rank": "Holders",
       "contact": "Contact",
-      "whitepaper": "Whitepaper"
+      "whitepaper": "Whitepaper",
+      "HIPPOStaking": "HIP Farming"
     }
   },
   "index": {
@@ -15,7 +16,8 @@
     },
     "activity": {
       "title": "AirDrops",
-      "checkClaim": "Check/Claim"
+      "checkClaim": "Check/Claim",
+      "airdropClaimEnded":"Airdrop claim ended"
     },
     "rankHolders": {
       "title": "Holders Ranking",
