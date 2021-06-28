@@ -17,7 +17,12 @@
     "activity": {
       "title": "AirDrops",
       "checkClaim": "Check/Claim",
-      "airdropClaimEnded":"Airdrop claim ended"
+      "airdropClaimEnded": "Airdrop claim ended"
+    },
+    "luckyDraw": {
+      "title": "抽奖活动",
+      "label": "第{lotteryPeriod}期",
+      "lotteryResult": "查看抽奖结果"
     },
     "rankHolders": {
       "title": "Holders Ranking",
@@ -44,5 +49,12 @@
       "tips03": "2. Follow us on ",
       "tips04": ", further airdrop info will be released before 30th June."
     }
+  },
+  "lotteryResult": {
+    "title": "抽奖活动",
+    "lotteryPeriod": "期数：",
+    "lotteryTime": "抽奖时间：",
+    "lotteryBlock": "抽奖块高度：",
+    "checkWinningResults": "查看中奖结果"
   }
 }

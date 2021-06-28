@@ -2,12 +2,7 @@
   <div class="m-footer-wrapper">
     <div class="m-footer">
       <div class="links">
-        <a
-          :href="$i18n.locale === LOCALES.EN ? item.links.EN : item.links.ZH"
-          target="_blank"
-          v-for="(item, index) in links"
-          :key="index"
-        >
+        <a :href="item.links[locale]" target="_blank" v-for="(item, index) in links" :key="index">
           <img :src="item.img" />
         </a>
       </div>
@@ -22,25 +17,27 @@
 import Lang from '../lang/lang.vue'
 import { ref, defineComponent } from 'vue'
 import { LOCALES } from '../../i18n/index'
+import { useI18n } from 'vue-i18n'
+
 const LINKS = [
   {
     links: {
-      EN: 'https://t.me/cycan_network',
-      ZH: 'https://t.me/CycanGlobal'
+      [LOCALES.EN]: 'https://t.me/cycan_network',
+      [LOCALES.ZH]: 'https://t.me/CycanGlobal'
     },
     img: require('./telegram.png')
   },
   {
     links: {
-      EN: 'https://twitter.com/CycanNetwork',
-      ZH: 'https://twitter.com/CycanNetwork'
+      [LOCALES.EN]: 'https://twitter.com/CycanNetwork',
+      [LOCALES.ZH]: 'https://twitter.com/CycanNetwork'
     },
     img: require('./twitter.png')
   },
   {
     links: {
-      EN: 'https://coinmarketcap.com/currencies/hippo-token/',
-      ZH: 'https://coinmarketcap.com/currencies/hippo-token/'
+      [LOCALES.EN]: 'https://coinmarketcap.com/currencies/hippo-token/',
+      [LOCALES.ZH]: 'https://coinmarketcap.com/currencies/hippo-token/'
     },
     img: require('./coinmarketcap.png')
   }
@@ -51,8 +48,11 @@ export default defineComponent({
   },
   setup() {
     const links = ref(LINKS)
+    const { locale } = useI18n()
+
     return {
       links,
+      locale,
       LOCALES
     }
   }

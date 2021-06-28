@@ -5,36 +5,36 @@
         <div class="airdrop-model-header">
           <i class="el-icon-close" @click="changeAirdropModelDisplay"></i>
           <div class="title">
-            {{ $t('message.index.checkClaimModel.title') }}
+            {{ t('message.index.checkClaimModel.title') }}
           </div>
         </div>
         <div class="address-connect">
           <div class="account">
             <span v-if="isConnected">{{ shortenAddress(userAccount, 7) }}</span>
-            <span class="tip" v-else> {{ $t('message.index.checkClaimModel.tips') }}</span>
+            <span class="tip" v-else> {{ t('message.index.checkClaimModel.tips') }}</span>
           </div>
           <div class="connect">
             <el-button size="small" round v-if="isConnected" @click="onDisconnect">
-              {{ $t('message.index.checkClaimModel.disconnect') }}
+              {{ t('message.index.checkClaimModel.disconnect') }}
             </el-button>
             <el-button size="small" round v-else @click="onConnect" :loading="isConnecting">
-              {{ $t('message.index.checkClaimModel.connectWallet') }}
+              {{ t('message.index.checkClaimModel.connectWallet') }}
             </el-button>
           </div>
         </div>
         <div class="action-tips" v-if="isConnected">
           <div class="label">
-            {{ $t('message.index.checkClaimModel.result') }}
+            {{ t('message.index.checkClaimModel.result') }}
           </div>
           <div class="result" v-if="!isLoading">
             <span class="success" v-if="isConnected && isInWhitelist && isAirdropped">
-              {{ $t('message.index.checkClaimModel.airdropped') }}
+              {{ t('message.index.checkClaimModel.airdropped') }}
             </span>
             <span class="success" v-else-if="isConnected && isInWhitelist">
-              {{ $t('message.index.checkClaimModel.inWhitelist') }}
+              {{ t('message.index.checkClaimModel.inWhitelist') }}
             </span>
             <span class="warning" v-else>
-              {{ $t('message.index.checkClaimModel.notAirdropped') }}
+              {{ t('message.index.checkClaimModel.notAirdropped') }}
             </span>
           </div>
         </div>
@@ -46,25 +46,25 @@
             type="primary"
             size="medium"
           >
-            {{ $t('message.index.checkClaimModel.receiveAirdrop') }}
+            {{ t('message.index.checkClaimModel.receiveAirdrop') }}
           </el-button>
         </div>
         <div class="tips">
-          <h3>{{ $t('message.index.checkClaimModel.tipsTitle') }}</h3>
+          <h3>{{ t('message.index.checkClaimModel.tipsTitle') }}</h3>
           <p>
-            {{ $t('message.index.checkClaimModel.tips01')
+            {{ t('message.index.checkClaimModel.tips01')
             }}<a
               target="_blank"
               href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0x55d398326f99059ff775485246999027b3197955&outputCurrency=0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b"
             >
               PancakeSwap
             </a>
-            {{ $t('message.index.checkClaimModel.tips02') }}
+            {{ t('message.index.checkClaimModel.tips02') }}
           </p>
           <p>
-            {{ $t('message.index.checkClaimModel.tips03') }}
+            {{ t('message.index.checkClaimModel.tips03') }}
             <a href="https://twitter.com/CycanNetwork" target="_blank">Twitter</a>
-            {{ $t('message.index.checkClaimModel.tips04') }}
+            {{ t('message.index.checkClaimModel.tips04') }}
           </p>
         </div>
       </div>
@@ -86,17 +86,20 @@ import {
 } from '@/common/ts/const'
 import airdropV1 from '@/abi/airdropV1.json'
 import airdropV2 from '@/abi/airdropV2.json'
+import { useI18n } from 'vue-i18n'
 
 function getProvider(): any | undefined {
   const ethereum = window.ethereum
   const provider = window?.web3?.currentProvider
   return ethereum || provider || undefined
 }
+
 export default {
   components: { Popup },
   setup() {
     const provider = getProvider()
     let web3: Web3
+    const { t } = useI18n()
 
     onMounted(() => {
       _watchAccountsChange()
@@ -202,6 +205,7 @@ export default {
       isAirdropped,
       isInWhitelist,
 
+      t,
       changeAirdropModelDisplay,
       onConnect,
       onDisconnect,

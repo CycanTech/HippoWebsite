@@ -17,7 +17,7 @@
     "activity": {
       "title": "空投活动",
       "checkClaim": "查验/领取",
-      "airdropClaimEnded":"空投领取已截止"
+      "airdropClaimEnded": "空投领取已截止"
     },
     "rankHolders": {
       "title": "持币人排名",
@@ -28,6 +28,11 @@
       "getAirdrop": "获得空投",
       "totalHoldings": "总持有量",
       "ratio": "比率"
+    },
+    "luckyDraw": {
+      "title": "抽奖活动",
+      "label": "第{lotteryPeriod}期",
+      "lotteryResult": "查看抽奖结果"
     },
     "checkClaimModel": {
       "title": "查验/领取",
@@ -46,5 +51,12 @@
       "tips03": "2. 关注我们的 ",
       "tips04": "，在6月30日前会不定期发布空投资讯"
     }
+  },
+  "lotteryResult": {
+    "title": "抽奖活动",
+    "lotteryPeriod": "期数：",
+    "lotteryTime": "抽奖时间：",
+    "lotteryBlock": "抽奖块高度：",
+    "checkWinningResults": "查看中奖结果"
   }
 }
