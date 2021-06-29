@@ -16,44 +16,20 @@
 <script lang="ts">
 import Lang from '../lang/lang.vue'
 import { ref, defineComponent } from 'vue'
-import { LOCALES } from '../../i18n/index'
+import { SOCIAL_LINKS } from '../../config/index'
 import { useI18n } from 'vue-i18n'
 
-const LINKS = [
-  {
-    links: {
-      [LOCALES.EN]: 'https://t.me/cycan_network',
-      [LOCALES.ZH]: 'https://t.me/CycanGlobal'
-    },
-    img: require('./telegram.png')
-  },
-  {
-    links: {
-      [LOCALES.EN]: 'https://twitter.com/CycanNetwork',
-      [LOCALES.ZH]: 'https://twitter.com/CycanNetwork'
-    },
-    img: require('./twitter.png')
-  },
-  {
-    links: {
-      [LOCALES.EN]: 'https://coinmarketcap.com/currencies/hippo-token/',
-      [LOCALES.ZH]: 'https://coinmarketcap.com/currencies/hippo-token/'
-    },
-    img: require('./coinmarketcap.png')
-  }
-]
 export default defineComponent({
   components: {
     Lang
   },
   setup() {
-    const links = ref(LINKS)
+    const links = ref(SOCIAL_LINKS)
     const { locale } = useI18n()
 
     return {
       links,
       locale,
-      LOCALES
     }
   }
 })
