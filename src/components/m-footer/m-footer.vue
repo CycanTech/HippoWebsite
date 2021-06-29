@@ -22,35 +22,14 @@
 import Lang from '../lang/lang.vue'
 import { ref, defineComponent } from 'vue'
 import { LOCALES } from '../../i18n/index'
-const LINKS = [
-  {
-    links: {
-      EN: 'https://t.me/cycan_network',
-      ZH: 'https://t.me/CycanGlobal'
-    },
-    img: require('./telegram.png')
-  },
-  {
-    links: {
-      EN: 'https://twitter.com/CycanNetwork',
-      ZH: 'https://twitter.com/CycanNetwork'
-    },
-    img: require('./twitter.png')
-  },
-  {
-    links: {
-      EN: 'https://coinmarketcap.com/currencies/hippo-token/',
-      ZH: 'https://coinmarketcap.com/currencies/hippo-token/'
-    },
-    img: require('./coinmarketcap.png')
-  }
-]
+import { SOCIAL_LINKS } from '../../config/index'
+
 export default defineComponent({
   components: {
     Lang
   },
   setup() {
-    const links = ref(LINKS)
+    const links = ref(SOCIAL_LINKS)
     return {
       links,
       LOCALES

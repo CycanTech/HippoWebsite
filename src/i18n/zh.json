@@ -6,7 +6,8 @@
       "rank": "持币人排名",
       "contact": "联系我们",
       "whitepaper": "白皮书",
-      "HIPPOStaking": "HIP 流动性挖矿"
+      "HIPPOStaking": "HIP 流动性挖矿",
+      "document": "文档"
     }
   },
   "index": {
@@ -17,7 +18,7 @@
     "activity": {
       "title": "空投活动",
       "checkClaim": "查验/领取",
-      "airdropClaimEnded":"空投领取已截止"
+      "airdropClaimEnded": "空投领取已截止"
     },
     "rankHolders": {
       "title": "持币人排名",
