@@ -29,7 +29,7 @@
             {{ $t('message.header.menu.whitepaper') }}
           </a>
         </div>
-        <div class="nav hippo-staking">
+        <div class="nav">
           <a
             :href="
               $i18n.locale === LOCALES.EN
@@ -39,6 +39,30 @@
             target="_blank"
           >
             {{ $t('message.header.menu.HIPPOStaking') }}
+          </a>
+        </div>
+        <div class="nav">
+          <a
+            :href="
+              $i18n.locale === LOCALES.EN
+                ? 'https://global.hippogame.org/#/en-US'
+                : 'https://global.hippogame.org/#/zh-CN'
+            "
+            target="_blank"
+          >
+            Hippo Game
+          </a>
+        </div>
+        <div class="nav">
+          <a
+            :href="
+              $i18n.locale === LOCALES.EN
+                ? 'https://docs.hippogame.org/'
+                : 'https://docs.hippogame.org/v/cn/'
+            "
+            target="_blank"
+          >
+            {{ $t('message.header.menu.document') }}
           </a>
         </div>
       </div>
@@ -82,7 +106,7 @@
               {{ $t('message.header.menu.whitepaper') }}
             </a>
           </div>
-          <div class="nav hippo-staking">
+          <div class="nav">
             <a
               :href="
                 $i18n.locale === LOCALES.EN
@@ -92,6 +116,30 @@
               target="_blank"
             >
               {{ $t('message.header.menu.HIPPOStaking') }}
+            </a>
+          </div>
+          <div class="nav">
+            <a
+              :href="
+                $i18n.locale === LOCALES.EN
+                  ? 'https://global.hippogame.org/#/en-US'
+                  : 'https://global.hippogame.org/#/zh-CN'
+              "
+              target="_blank"
+            >
+              Hippo Game
+            </a>
+          </div>
+          <div class="nav">
+            <a
+              :href="
+                $i18n.locale === LOCALES.EN
+                  ? 'https://docs.hippogame.org/'
+                  : 'https://docs.hippogame.org/v/cn/'
+              "
+              target="_blank"
+            >
+              {{ $t('message.header.menu.document') }}
             </a>
           </div>
         </div>
@@ -163,12 +211,14 @@ const useScrollY = () => {
 .m-hader-model-wrapper {
   height: 100vh;
   width: 100vw;
-  background: #fff;
+  background: #fafeff;
   .top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: #fff;
     padding: 15px;
+    border: 1px solid #e1e7fa;
     .avatar {
       flex: 0 0 120px;
       img {
@@ -184,25 +234,14 @@ const useScrollY = () => {
   }
   .navs {
     .nav {
-      height: 100px;
-      line-height: 100px;
-      text-align: center;
+      padding: 0 20px;
+      height: 50px;
+      line-height: 50px;
+      text-align: left;
       cursor: pointer;
+      color: #202e6b;
       a {
-        color: #000;
-      }
-    }
-    .hippo-staking {
-      a {
-        display: inline-block;
-        height: 38px;
-        line-height: 38px;
-        background: #7c70ec;
-        border-radius: 19px;
-        padding: 0 18px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #ffffff;
+        color: #202e6b;
       }
     }
   }
@@ -250,25 +289,14 @@ const useScrollY = () => {
       font-size: $font-size-medium-x;
       font-weight: bold;
       color: $color-theme;
-      width: 400px;
+      flex: 1;
+      padding-left: 20%;
       .nav {
         cursor: pointer;
         height: 33px;
         line-height: 33px;
         a {
           color: $color-theme;
-        }
-      }
-      .hippo-staking {
-        a {
-          display: block;
-          height: 33px;
-          background: #7c70ec;
-          border-radius: 17px;
-          padding: 0 18px;
-          font-size: 14px;
-          font-weight: bold;
-          color: #ffffff;
         }
       }
     }
