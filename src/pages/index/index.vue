@@ -18,6 +18,16 @@
         <div class="card-mobile">
           <img :src="cardImags.mobile[locale]" />
         </div>
+        <div class="hippo-desc">
+          <div class="title">
+            {{ t('message.index.info.understandingHippo') }}
+          </div>
+          <div class="video">
+            <video controls :poster="videoPosters[locale]">
+              <source type="video/mp4" :src="videos[locale]" />
+            </video>
+          </div>
+        </div>
       </div>
       <div class="activity-wrapper" id="activity">
         <h1>{{ t('message.index.activity.title') }}</h1>
@@ -52,7 +62,7 @@
           </el-tab-pane>
         </el-tabs>
       </div>
-      <div class="lucky-draw-wrapper">
+      <!-- <div class="lucky-draw-wrapper">
         <h1>{{ t('message.index.luckyDraw.title') }}</h1>
         <div class="lucky-draw-content">
           <el-tabs>
@@ -72,7 +82,7 @@
             </el-tab-pane>
           </el-tabs>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <airdrop-model ref="airdropModel" :projects="projects" />
@@ -110,6 +120,15 @@ const cardImags = {
     [LOCALES.EN]: require('./tokenomics-en.png'),
     [LOCALES.ZH]: require('./tokenomics-zh.png')
   }
+}
+
+const videos = {
+  [LOCALES.EN]: '/video/HippoDesc_en-US.MP4',
+  [LOCALES.ZH]: '/video/HippoDesc_zh-CN.MP4'
+}
+const videoPosters = {
+  [LOCALES.EN]: '/video/poster_en-US.png',
+  [LOCALES.ZH]: '/video/poster_zh-CN.png'
 }
 
 export default {
@@ -158,6 +177,8 @@ export default {
       toLotteryResult,
       handleShowAirdropModel,
       cardImags,
+      videos,
+      videoPosters,
 
       LOCALES,
       lotterys
@@ -242,27 +263,16 @@ export default {
       .card-mobile {
         display: none;
       }
-      @include tablet {
-        .card {
-          display: none;
+      .hippo-desc {
+        .title {
+          margin: 40px 0;
+          text-align: center;
+          font-size: 24px;
+          font-weight: bold;
+          color: #000000;
         }
-        .card-mobile {
-          display: block;
-          margin-top: 35px;
-          img {
-            width: 100%;
-            height: auto;
-          }
-        }
-      }
-      @include mobile {
-        .card {
-          display: none;
-        }
-        .card-mobile {
-          display: block;
-          margin-top: 35px;
-          img {
+        .video {
+          video {
             width: 100%;
             height: auto;
           }
@@ -349,15 +359,22 @@ export default {
   @include tablet {
     .content {
       padding: 0 16px;
+      .info {
+        .card {
+          display: none;
+        }
+        .card-mobile {
+          display: block;
+          margin-top: 35px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
     }
   }
   @include mobile {
-    h1 {
-      font-size: $font-size-large;
-    }
-    p {
-      font-size: $font-size-large;
-    }
     .banner {
       display: none;
     }
@@ -367,8 +384,31 @@ export default {
     .content {
       padding: 0 16px;
       h1 {
+        font-size: $font-size-large;
         padding-top: 55px;
         padding-bottom: 20px;
+      }
+      p {
+        font-size: $font-size-large;
+      }
+      .info {
+        .card {
+          display: none;
+        }
+        .card-mobile {
+          display: block;
+          margin-top: 35px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+        .hippo-desc {
+          .title {
+            font-size: $font-size-large;
+            margin: 20px;
+          }
+        }
       }
       .activity-wrapper {
         .activity {
