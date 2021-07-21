@@ -4,26 +4,36 @@
     <img class="mobile-banner" src="./mobile-banner.png" />
     <div class="content">
       <div class="info" id="desc">
-        <h1>{{ $t('message.index.info.title') }}</h1>
-        <p v-html="$t('message.index.info.desc')"></p>
+        <h1>{{ t('message.index.info.title') }}</h1>
+        <p v-html="t('message.index.info.desc')"></p>
         <div class="card">
           <div class="title">
-            {{ $t('message.index.info.tokenomics') }}
+            {{ t('message.index.info.tokenomics') }}
           </div>
           <div class="imgs">
-            <img class="img1" :src="cardImags.allocations[$i18n.locale]" />
-            <img class="img2" :src="cardImags.total[$i18n.locale]" />
+            <img class="img1" :src="cardImags.allocations[locale]" />
+            <img class="img2" :src="cardImags.total[locale]" />
           </div>
         </div>
         <div class="card-mobile">
-          <img :src="cardImags.mobile[$i18n.locale]" />
+          <img :src="cardImags.mobile[locale]" />
+        </div>
+        <div class="hippo-desc">
+          <div class="title">
+            {{ t('message.index.info.understandingHippo') }}
+          </div>
+          <div class="video">
+            <video controls :poster="videoPosters[locale]">
+              <source type="video/mp4" :src="videos[locale]" />
+            </video>
+          </div>
         </div>
       </div>
       <div class="activity-wrapper" id="activity">
-        <h1>{{ $t('message.index.activity.title') }}</h1>
+        <h1>{{ t('message.index.activity.title') }}</h1>
         <el-tabs type="border-card">
           <el-tab-pane
-            :label="$i18n.locale === LOCALES.EN ? tab.names.EN : tab.names.ZH"
+            :label="locale === LOCALES.EN ? tab.names.EN : tab.names.ZH"
             v-for="(tab, index) in tabs"
             :key="index"
           >
@@ -31,7 +41,7 @@
               <div class="activity-info">
                 <div
                   class="activity-content"
-                  v-html="$i18n.locale === LOCALES.EN ? tab.content.EN : tab.content.ZH"
+                  v-html="locale === LOCALES.EN ? tab.content.EN : tab.content.ZH"
                 />
                 <div class="activity-img-wrapper">
                   <img :src="tab.img" />
@@ -45,16 +55,37 @@
                   round
                   :disabled="true"
                 >
-                  {{ $t('message.index.activity.airdropClaimEnded') }}
+                  {{ t('message.index.activity.airdropClaimEnded') }}
                 </el-button>
               </div>
             </div>
           </el-tab-pane>
         </el-tabs>
       </div>
+      <!-- <div class="lucky-draw-wrapper">
+        <h1>{{ t('message.index.luckyDraw.title') }}</h1>
+        <div class="lucky-draw-content">
+          <el-tabs>
+            <el-tab-pane
+              :label="t('message.index.luckyDraw.label', { lotteryPeriod: item.lotteryPeriod })"
+              v-for="(item, index) in lotterys"
+              :key="index"
+            >
+              <div class="lucky-draw">
+                <div class="lottery-drawn" v-html="item.contents[locale]" />
+                <div class="lottery-result">
+                  <el-button type="primary" size="medium" round @click="toLotteryResult(index)">
+                    {{ t('message.index.luckyDraw.lotteryResult') }}
+                  </el-button>
+                </div>
+              </div>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
+      </div> -->
     </div>
-    <airdrop-model ref="airdropModel" :projects="projects" />
   </div>
+  <airdrop-model ref="airdropModel" :projects="projects" />
 </template>
 
 <script lang="ts">
@@ -63,7 +94,19 @@ import { LOCALES } from '../../i18n/index'
 import AirdropModel from './airdrop-model/airdrop-model.vue'
 import tabList from './tabs'
 import getProjects, { Project } from '@/service/getProjects'
+import { useI18n } from 'vue-i18n'
+import useProxyRouter from '../../common/use/useProxyRouter'
 
+const lotterys = [
+  {
+    lotteryPeriod: 1,
+    isLotteryDrawn: false,
+    contents: {
+      [LOCALES.ZH]: `抽奖时间：2021/06/09 19:00（GMT+8）<br/>该奖励不需要进行抽奖，仅跟进持币数量排名获得奖励。通过链上智能合约随机生成888个号码，去掉重复的号码，第1个号码为特等奖，第2-11个号码为一等奖，在剩余号码中剔除号码0-99，剩余号码中的前700个为二等奖`,
+      [LOCALES.EN]: `抽奖时间：2021/06/09 19:00（GMT+8）<br/>。该奖励不需要进行抽奖，仅跟进持币数量排名获得奖励。 通过链上智能合约随机生成888个号码，去掉重复的号码，第1个号码为特等奖，第2-11个号码为一等奖，在剩余号码中剔除号码0-99，剩余号码中的前700个为二等奖`
+    }
+  }
+]
 const cardImags = {
   allocations: {
     [LOCALES.EN]: require('./allocation-en.png'),
@@ -79,20 +122,43 @@ const cardImags = {
   }
 }
 
+const videos = {
+  [LOCALES.EN]: '/video/HippoDesc_en-US.MP4',
+  [LOCALES.ZH]: '/video/HippoDesc_zh-CN.MP4'
+}
+const videoPosters = {
+  [LOCALES.EN]: '/video/poster_en-US.png',
+  [LOCALES.ZH]: '/video/poster_zh-CN.png'
+}
+
 export default {
   components: {
     AirdropModel
   },
   setup() {
+    const { t, locale } = useI18n()
+    const router = useProxyRouter()
     const tabs = ref(tabList)
     const searchRankAddress = ref<string>('')
 
     const airdropModel = ref<{
       checkWhitelistAddress: Ref<string>
       changeAirdropModelDisplay: () => void
-    } | null>(null)
+    }>()
+
     const handleShowAirdropModel = () => {
       airdropModel.value?.changeAirdropModelDisplay()
+    }
+
+    const toLotteryResult = (i: number) => {
+      const item = lotterys[i]
+
+      router.push({
+        path: '/lotteryResult',
+        query: {
+          lotteryPeriod: item.lotteryPeriod
+        }
+      })
     }
 
     const projects = ref<Project[]>([])
@@ -102,15 +168,20 @@ export default {
 
     return {
       tabs,
+      locale,
       searchRankAddress,
       projects,
-
       airdropModel,
+
+      t,
+      toLotteryResult,
       handleShowAirdropModel,
       cardImags,
+      videos,
+      videoPosters,
 
       LOCALES,
-      tableData: []
+      lotterys
     }
   }
 }
@@ -192,27 +263,16 @@ export default {
       .card-mobile {
         display: none;
       }
-      @include tablet {
-        .card {
-          display: none;
+      .hippo-desc {
+        .title {
+          margin: 40px 0;
+          text-align: center;
+          font-size: 24px;
+          font-weight: bold;
+          color: #000000;
         }
-        .card-mobile {
-          display: block;
-          margin-top: 35px;
-          img {
-            width: 100%;
-            height: auto;
-          }
-        }
-      }
-      @include mobile {
-        .card {
-          display: none;
-        }
-        .card-mobile {
-          display: block;
-          margin-top: 35px;
-          img {
+        .video {
+          video {
             width: 100%;
             height: auto;
           }
@@ -265,6 +325,19 @@ export default {
         }
       }
     }
+    .lucky-draw-wrapper {
+      .lucky-draw-content {
+        .lucky-draw {
+          position: relative;
+          padding: 40px 0;
+          .lottery-result {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+          }
+        }
+      }
+    }
     .rank-holders {
       .table {
         border-radius: 4px;
@@ -286,15 +359,22 @@ export default {
   @include tablet {
     .content {
       padding: 0 16px;
+      .info {
+        .card {
+          display: none;
+        }
+        .card-mobile {
+          display: block;
+          margin-top: 35px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
     }
   }
   @include mobile {
-    h1 {
-      font-size: $font-size-large;
-    }
-    p {
-      font-size: $font-size-large;
-    }
     .banner {
       display: none;
     }
@@ -304,8 +384,31 @@ export default {
     .content {
       padding: 0 16px;
       h1 {
+        font-size: $font-size-large;
         padding-top: 55px;
         padding-bottom: 20px;
+      }
+      p {
+        font-size: $font-size-large;
+      }
+      .info {
+        .card {
+          display: none;
+        }
+        .card-mobile {
+          display: block;
+          margin-top: 35px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+        .hippo-desc {
+          .title {
+            font-size: $font-size-large;
+            margin: 20px;
+          }
+        }
       }
       .activity-wrapper {
         .activity {

@@ -19,9 +19,9 @@ const messages = {
   }
 }
 
-const defaultLang = getCurrentLang()
 const i18n = createI18n({
-  locale: LOCALES_ROUTER[defaultLang],
+  legacy: false,
+  locale: LOCALES_ROUTER[getCurrentLang()],
   fallbackLocale: LOCALES.EN,
   messages
 })

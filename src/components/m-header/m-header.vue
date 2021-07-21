@@ -6,63 +6,29 @@
       </div>
       <div class="navs">
         <div class="nav" @click="scrollToControl('desc')">
-          {{ $t('message.header.menu.desc') }}
+          {{ t('message.header.menu.desc') }}
         </div>
         <div class="nav" @click="scrollToControl('activity')">
-          {{ $t('message.header.menu.airdrop') }}
-        </div>
-        <!-- <div class="nav" @click="scrollToControl('rank')">
-          {{ $t('message.header.menu.rank') }}
+          {{ t('message.header.menu.airdrop') }}
         </div>
         <div class="nav">
-          {{ $t('message.header.menu.contact') }}
-        </div> -->
-        <div class="nav">
-          <a
-            :href="
-              $i18n.locale === LOCALES.EN
-                ? '/whitepaper/HIPPOLitePaper.pdf'
-                : '/whitepaper/HIPPOLitePaperChinese.pdf'
-            "
-            target="_blank"
-          >
-            {{ $t('message.header.menu.whitepaper') }}
+          <a :href="whitepapers[locale]" target="_blank">
+            {{ t('message.header.menu.whitepaper') }}
           </a>
         </div>
         <div class="nav">
-          <a
-            :href="
-              $i18n.locale === LOCALES.EN
-                ? 'https://hipfarm.cycan.network/#/en/index'
-                : 'https://hipdefi.cycan.network/#/zh/index'
-            "
-            target="_blank"
-          >
-            {{ $t('message.header.menu.HIPPOStaking') }}
+          <a :href="stakingLinks[locale]" target="_blank">
+            {{ t('message.header.menu.HIPPOStaking') }}
           </a>
         </div>
         <div class="nav">
-          <a
-            :href="
-              $i18n.locale === LOCALES.EN
-                ? 'https://global.hippogame.org/#/en-US'
-                : 'https://global.hippogame.org/#/zh-CN'
-            "
-            target="_blank"
-          >
+          <a :href="gameLinks[locale]" target="_blank">
             Hippo Game
           </a>
         </div>
         <div class="nav">
-          <a
-            :href="
-              $i18n.locale === LOCALES.EN
-                ? 'https://docs.hippogame.org/'
-                : 'https://docs.hippogame.org/v/cn/'
-            "
-            target="_blank"
-          >
-            {{ $t('message.header.menu.document') }}
+          <a :href="docLinks[locale]" target="_blank">
+            {{ t('message.header.menu.document') }}
           </a>
         </div>
       </div>
@@ -83,63 +49,29 @@
         </div>
         <div class="navs">
           <div class="nav" @click="scrollToControl('desc')">
-            {{ $t('message.header.menu.desc') }}
+            {{ t('message.header.menu.desc') }}
           </div>
           <div class="nav" @click="scrollToControl('activity')">
-            {{ $t('message.header.menu.airdrop') }}
-          </div>
-          <!-- <div class="nav" @click="scrollToControl('rank')">
-            {{ $t('message.header.menu.rank') }}
+            {{ t('message.header.menu.airdrop') }}
           </div>
           <div class="nav">
-            {{ $t('message.header.menu.contact') }}
-          </div> -->
-          <div class="nav">
-            <a
-              :href="
-                $i18n.locale === LOCALES.EN
-                  ? '/whitepaper/HIPPOLitePaper.pdf'
-                  : '/whitepaper/HIPPOLitePaperChinese.pdf'
-              "
-              target="_blank"
-            >
-              {{ $t('message.header.menu.whitepaper') }}
+            <a :href="whitepapers[locale]" target="_blank">
+              {{ t('message.header.menu.whitepaper') }}
             </a>
           </div>
           <div class="nav">
-            <a
-              :href="
-                $i18n.locale === LOCALES.EN
-                  ? 'https://hipfarm.cycan.network/#/en/index'
-                  : 'https://hipdefi.cycan.network/#/zh/index'
-              "
-              target="_blank"
-            >
-              {{ $t('message.header.menu.HIPPOStaking') }}
+            <a :href="stakingLinks[locale]" target="_blank">
+              {{ t('message.header.menu.HIPPOStaking') }}
             </a>
           </div>
           <div class="nav">
-            <a
-              :href="
-                $i18n.locale === LOCALES.EN
-                  ? 'https://global.hippogame.org/#/en-US'
-                  : 'https://global.hippogame.org/#/zh-CN'
-              "
-              target="_blank"
-            >
+            <a :href="gameLinks[locale]" target="_blank">
               Hippo Game
             </a>
           </div>
           <div class="nav">
-            <a
-              :href="
-                $i18n.locale === LOCALES.EN
-                  ? 'https://docs.hippogame.org/'
-                  : 'https://docs.hippogame.org/v/cn/'
-              "
-              target="_blank"
-            >
-              {{ $t('message.header.menu.document') }}
+            <a :href="docLinks[locale]" target="_blank">
+              {{ t('message.header.menu.document') }}
             </a>
           </div>
         </div>
@@ -149,26 +81,43 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, onUnmounted } from 'vue'
+import { ref, defineComponent, onUnmounted, onMounted } from 'vue'
 import { getElementPosition, sleep } from '../../common/ts/utils'
 import { LOCALES } from '../../i18n/index'
+import { useI18n } from 'vue-i18n'
 import Popup from '../popup/popup.vue'
 
 const EVENT_SCROLL = 'scroll'
 const HEADER_HEIGHT = 64
+const whitepapers = {
+  [LOCALES.ZH]: '/whitepaper/HIPPOLitePaperChinese.pdf',
+  [LOCALES.EN]: '/whitepaper/HIPPOLitePaper.pdf'
+}
+const stakingLinks = {
+  [LOCALES.ZH]: 'https://hipdefi.cycan.network/#/zh/index',
+  [LOCALES.EN]: 'https://hipfarm.cycan.network/#/en/index'
+}
+const gameLinks = {
+  [LOCALES.ZH]: 'https://global.hippogame.org/#/zh-CN',
+  [LOCALES.EN]: 'https://global.hippogame.org/#/en-US'
+}
+const docLinks = {
+  [LOCALES.ZH]: 'https://docs.hippogame.org/v/cn/',
+  [LOCALES.EN]: 'https://docs.hippogame.org/'
+}
 
 export default defineComponent({
   components: {
     Popup
   },
   setup() {
+    const { t, locale } = useI18n()
     const scrollY = useScrollY()
 
     const showModel = ref(false)
     const changeModelDisplay = () => {
       showModel.value = !showModel.value
     }
-
     const scrollToControl = async (id: string) => {
       if (showModel.value) {
         showModel.value = false
@@ -181,6 +130,13 @@ export default defineComponent({
     return {
       scrollY,
       showModel,
+      locale,
+      whitepapers,
+      stakingLinks,
+      gameLinks,
+      docLinks,
+
+      t,
       changeModelDisplay,
       scrollToControl,
       HEADER_HEIGHT,
@@ -191,13 +147,14 @@ export default defineComponent({
 
 const useScrollY = () => {
   const scrollY = ref<number>(0)
-
   const handerScroll = (e: Event) => {
     const scrollTop: number = (e.target as HTMLElement).scrollTop
     scrollY.value = scrollTop
   }
 
-  document.body.addEventListener(EVENT_SCROLL, handerScroll)
+  onMounted(() => {
+    document.body.addEventListener(EVENT_SCROLL, handerScroll)
+  })
   onUnmounted(() => {
     document.body.removeEventListener(EVENT_SCROLL, handerScroll)
   })

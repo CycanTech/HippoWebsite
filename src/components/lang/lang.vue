@@ -21,9 +21,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { ref, watch, computed, defineComponent } from 'vue'
 import { setItem } from '../../common/ts/utils'
-import { LOCALES, LOCALES_ROUTER, ROUTER_LOCALES, getCurrentLang } from '../../i18n/index'
+import { LOCALES, ROUTER_LOCALES, LOCALES_ROUTER, getCurrentLang } from '../../i18n/index'
+import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
 
 const M_LANGUAGE = 'M_LANGUAGE'
 const langs = [
@@ -31,38 +34,46 @@ const langs = [
   { text: 'English', lang: ROUTER_LOCALES[LOCALES.EN] }
 ]
 
-export default {
-  data() {
-    return {
-      langs,
-      current: getCurrentLang(),
-      isVisible: false
-    }
-  },
-  computed: {
-    lang() {
-      return this.$route.path.split('/')[1] || getCurrentLang()
-    }
-  },
-  watch: {
-    $router() {
-      if (this.current !== this.lang) {
-        this.toggle(this.lang)
+export default defineComponent({
+  setup() {
+    const current = ref(getCurrentLang())
+    const route = useRoute()
+    const router = useRouter()
+    const { locale } = useI18n()
+    const isVisible = ref(false)
+
+    const lang = computed(() => {
+      const urlLang = route.path.split('/')[1]
+      return urlLang || getCurrentLang()
+    })
+
+    const handleRouterPathChange = (): void => {
+      if (current.value === lang.value) {
+        return
       }
+      toggle(lang.value)
     }
-  },
-  methods: {
-    toggle(lang) {
-      this.isVisible = false
-      this.current = lang
-      setItem(M_LANGUAGE, this.current)
-      this.$i18n.locale = LOCALES_ROUTER[this.current]
-      this.$router.replace({
-        path: this.$route.path.replace(/\/(zh-CN|en-US)(?=\/?)/, `/${this.current}`)
+    const toggle = (routerLang: string): void => {
+      current.value = LOCALES_ROUTER[routerLang]
+      locale.value = current.value
+      setItem(M_LANGUAGE, current.value)
+      router.replace({
+        path: route.path.replace(/\/(zh-CN|en-US)(?=\/?)/, `/${ROUTER_LOCALES[current.value]}`)
       })
     }
+
+    watch(() => router.currentRoute.value.path, handleRouterPathChange)
+
+    return {
+      LOCALES,
+      current,
+      isVisible,
+      langs,
+
+      toggle
+    }
   }
-}
+})
 </script>
 
 <style lang="scss">

@@ -2,12 +2,7 @@
   <div class="m-footer-wrapper">
     <div class="m-footer">
       <div class="links">
-        <a
-          :href="$i18n.locale === LOCALES.EN ? item.links.EN : item.links.ZH"
-          target="_blank"
-          v-for="(item, index) in links"
-          :key="index"
-        >
+        <a :href="item.links[locale]" target="_blank" v-for="(item, index) in links" :key="index">
           <img :src="item.img" />
         </a>
       </div>
@@ -21,8 +16,8 @@
 <script lang="ts">
 import Lang from '../lang/lang.vue'
 import { ref, defineComponent } from 'vue'
-import { LOCALES } from '../../i18n/index'
 import { SOCIAL_LINKS } from '../../config/index'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   components: {
@@ -30,9 +25,11 @@ export default defineComponent({
   },
   setup() {
     const links = ref(SOCIAL_LINKS)
+    const { locale } = useI18n()
+
     return {
       links,
-      LOCALES
+      locale,
     }
   }
 })

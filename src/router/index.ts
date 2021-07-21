@@ -1,9 +1,13 @@
 import Index from '../pages/index/index.vue'
 import Home from '../pages/home/home.vue'
+import LotteryResult from '../pages/lottery-result/lottery-result.vue'
 import { ROUTER_LOCALES, LOCALES } from '../i18n/index'
 import { getCurrentLang } from '../i18n/index'
 
-const pages = [{ path: '', component: Index }]
+const pages = [
+  { path: '', component: Index },
+  { path: 'lotteryResult', component: LotteryResult }
+]
 
 export default [
   {
