@@ -45,12 +45,12 @@
 </template>
 
 <script lang="ts">
-import { Ref, ref } from 'vue'
+import {defineComponent, Ref, ref } from 'vue'
 import CheckModel from './check-model/check-model.vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 
-export default {
+export default defineComponent({
   components: {
     CheckModel
   },
@@ -79,7 +79,7 @@ export default {
       tableData: []
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

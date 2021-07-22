@@ -11,14 +11,14 @@
         <div class="address-connect">
           <div class="account">
             <span v-if="isConnected">{{ shortenAddress(userAccount, 7) }}</span>
-            <span class="tip" v-else> {{ t('message.index.checkClaimModel.tips') }}</span>
+            <span class="tip" v-else> {{ t('message.PlsConnect') }}</span>
           </div>
           <div class="connect">
             <el-button size="small" round v-if="isConnected" @click="onDisconnect">
-              {{ t('message.index.checkClaimModel.disconnect') }}
+              {{ t('message.disconnect') }}
             </el-button>
             <el-button size="small" round v-else @click="onConnect" :loading="isConnecting">
-              {{ t('message.index.checkClaimModel.connectWallet') }}
+              {{ t('message.connectWallet') }}
             </el-button>
           </div>
         </div>
@@ -73,7 +73,7 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { defineComponent, ref, onMounted, computed } from 'vue'
 import { ElMessage, ElLoading } from 'element-plus'
 import { shortenAddress } from '@/common/ts/utils'
 import Popup from '@/components/popup/popup.vue'
@@ -94,9 +94,12 @@ function getProvider(): any | undefined {
   return ethereum || provider || undefined
 }
 
-export default {
+export interface AirdropModelApi {
+  changeAirdropModelDisplay: () => void
+}
+export default defineComponent({
   components: { Popup },
-  setup() {
+  setup(_, { expose }) {
     const provider = getProvider()
     let web3: Web3
     const { t } = useI18n()
@@ -193,6 +196,10 @@ export default {
       }
     }
 
+    expose({
+      changeAirdropModelDisplay
+    })
+
     return {
       showModel,
       userAccount,
@@ -213,7 +220,7 @@ export default {
       shortenAddress
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

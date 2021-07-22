@@ -40,12 +40,12 @@
 </template>
 
 <script lang="ts">
-import { ref, computed } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import { shortenAddress, isAddress } from '@/common/ts/utils'
 import Popup from '@/components/popup/popup.vue'
 import { useI18n } from 'vue-i18n'
 
-export default {
+export default defineComponent({
   components: { Popup },
   setup() {
     const { t } = useI18n()
@@ -79,7 +79,7 @@ export default {
       shortenAddress
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

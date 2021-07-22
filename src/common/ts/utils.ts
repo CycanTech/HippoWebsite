@@ -1,3 +1,4 @@
+import Web3 from 'web3'
 import { getAddress } from '@ethersproject/address'
 
 export function setItem(k: string, v: string) {
@@ -54,4 +55,14 @@ export function shortenAddress(address: string, chars = 4): string {
     throw Error(`Invalid 'address' parameter '${address}'.`)
   }
   return `${parsed.substring(0, chars + 2)}...${parsed.substring(42 - chars)}`
+}
+
+// eslint-disable-next-line
+export function getContract(abi: any, address: string, library: Web3) {
+  if (isAddress(address) === false) {
+    throw Error(`Invalid address ${address}`)
+  }
+
+  const contract = new library.eth.Contract(abi, address)
+  return contract
 }

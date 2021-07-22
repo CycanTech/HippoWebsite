@@ -1,4 +1,8 @@
 {
+  "tokenomics": "代 币 分 配",
+  "connectWallet": "连接钱包",
+  "PlsConnect": "请连接您的钱包",
+  "disconnect": "断开连接",
   "header": {
     "menu": {
       "desc": "HIPPO介绍",
@@ -11,11 +15,14 @@
     }
   },
   "index": {
-    "info": {
+    "introduce": {
       "title": "什么是HIPPO?",
       "desc": "Hippo（HIP）是一场彻底的去中心化社区实验，目标是构造一个完全由社区驱动的DAO组织。无团队份额、无私募，70%全部分散空投给社区，5%根据贡献发放给社区志愿者，25%用于创设初始交易流动池并销毁私钥。<br/><br/>HIP是一张奖券，每天都有几率获得Cycan生态各类代币空投；<br/><br/>HIP是Hippo社区的治理代币，社区管理逐步实现完全的DAO。<br/><br/>Hippo是一个去中心化的NFT市场，HIP作为手续费直接被燃烧销毁。<br/><br/>Hippo是一个代币分发平台，根据社区喜好选择合适的项目在社区空投或发起IDO。<br/><br/>Hippo一切权利归于社区，未来在哪里由社区决定，谁都无法主宰这个项目，将拥有无限可能性。<br/><br/>HIP由Cycan network发起，Cycan定位于跨链去中心化资产管理平台，是一个完整的DEFI和NFT基础设施，未来将成为Polkadot的平行链，所有基于Cycan主网的生态项目都将向HIP的持有人空投。<br/><br/>HIPPO(HIP) BSC合约地址：<br/>0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b",
-      "tokenomics": "代 币 分 配",
       "understandingHippo": "一分钟了解Hippo"
+    },
+    "IDO": {
+      "desc": "Cycan Network, our main chain, is about to conduct its IDO using the Hippo IDO platform.<br/><br/>There are a total of 4000 IQTs (IDO Qualification Tickets). Out of these, 500 will be reserved for early contributors, volunteers and active members within the Cycan Network community. The balance of 3,500 IQTs can be won through a random lottery.<br/><br/>With each IQT, you can swap100 CYN (Cycan Network) tokens with 10 BUSD/USDT (0.10 BUSD/USDT per CYN token). <br/>Each BSC address can win multiple IQTs according to the number of HIP tokens held in each wallet at the time of the snapshot, which will be taken on 22nd July 2021.<br/><strong>Please follow the steps below to be eligible for the random lottery of 3,500 IQTs:</strong><br/><br/>① Fill in the Google form (<a href='https://forms.gle/pdfvwvFLQ6VNwbA77' target='_blank'>https://forms.gle/pdfvwvFLQ6VNwbA77</a>)and register a BSC address holding a minimum of 1 million HIP tokens.<br/><br/>The link to buy HIP on Pancake:(<a href='https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b' target='_blank'>https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b</a>)<br/><br/>② The number of IQT(s) won by each BSC address varies in accordance to its HIP token holdings:<br/><br/>1 million — 5 million Hip tokens: 1 IQT<br/>> 5 million — 10 million Hip tokens: 2 IQTs<br/>> 10 million — 50 million Hip tokens: 3 IQTs<br/>> 50 million Hip tokens: 4 IQTs<br/><br/>③Winners of the lottery can use their IQT(s) to swap CYN (Cycan Network) tokens on a designated website which will be announced nearer to or on the lottery date itself. (100 CYN tokens per IQT costs a total of 10 BUSD/USDT)Lottery winners can only use BUSD or USDT to swap CYN tokens.",
+      "join": "参加 IDO"
     },
     "activity": {
       "title": "空投活动",
@@ -40,10 +47,7 @@
     "checkClaimModel": {
       "title": "查验/领取",
       "receiveAirdrop": "领取空投",
-      "connectWallet": "连接钱包",
-      "tips": "请连接您的钱包",
       "result": "查验结果 :",
-      "disconnect": "断开连接",
       "inWhitelist": "该地址已参与本期空投",
       "airdropped": "该地址已领取空投",
       "notAirdropped": "该地址未参与本期空投",
@@ -53,6 +57,13 @@
       "tips02": " 兑换HIP-USDT",
       "tips03": "2. 关注我们的 ",
       "tips04": "，在6月30日前会不定期发布空投资讯"
+    },
+    "IDOModel": {
+      "IQTBanlace": "IQT 余额",
+      "swapQuantity": "兑换数量",
+      "maxQuantity": "最多可兑换：",
+      "swapCYN": "兑换CYN",
+      "placeholder": "请输入兑换数量"
     }
   },
   "lotteryResult": {

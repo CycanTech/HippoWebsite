@@ -1,4 +1,8 @@
 {
+  "tokenomics": "Tokenomics",
+  "connectWallet": "Connect Wallet",
+  "PlsConnect": "Connect to wallet",
+  "disconnect": "Disconnect",
   "header": {
     "menu": {
       "desc": "HIPPO",
@@ -11,11 +15,14 @@
     }
   },
   "index": {
-    "info": {
+    "introduce": {
       "title": "What is HIPPO?",
       "desc": "Hippo (HIP) is a thorough decentralized community experiment initiated by the Cycan community. Our vision is to build a Decentralized Autonomous Organization（DAO） driven entirely by the community.<br/><br/>HIPPO is a lottery ticket and every day there is a chance to receive airdrops of various tokens in the Cycan ecosystem.<br/><br/>HIPPO is the governance token of the Cycan community and step-by-step, we will strive to achieve a true DAO by pure community governance.<br/><br/>HIPPO is a decentralized NFT market and will be burned for transaction fees.<br/><br/>HIPPO is a token distribution platform and according to the community’s preferences, suitable projects will be selected for airdrops or we can initiate an IDO in the community.<br/><br/>All rights of Hippo belong to the community and the future is determined by the community instead of a single person or organization, Hippo is filled with Possibilities.<br/><br/>Cycan Network is a decentralized cross-chain digital asset management platform, and will be complete infrastructures for DeFi and NFT. All the projects based on Cycan Network will be airdropped to HIPPO holders. ELP will be the first airdropped token.<br/><br/>HIPPO(HIP) BSC Contract Address:<br/>0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b",
-      "tokenomics": "Tokenomics",
       "understandingHippo": "Understanding Hippo within one minute"
+    },
+    "IDO": {
+      "desc": "Cycan Network, our main chain, is about to conduct its IDO using the Hippo IDO platform.<br/><br/>There are a total of 4000 IQTs (IDO Qualification Tickets). Out of these, 500 will be reserved for early contributors, volunteers and active members within the Cycan Network community. The balance of 3,500 IQTs can be won through a random lottery.<br/><br/>With each IQT, you can swap100 CYN (Cycan Network) tokens with 10 BUSD/USDT (0.10 BUSD/USDT per CYN token). <br/>Each BSC address can win multiple IQTs according to the number of HIP tokens held in each wallet at the time of the snapshot, which will be taken on 22nd July 2021.<br/><strong>Please follow the steps below to be eligible for the random lottery of 3,500 IQTs:</strong><br/><br/>① Fill in the Google form (<a href='https://forms.gle/pdfvwvFLQ6VNwbA77' target='_blank'>https://forms.gle/pdfvwvFLQ6VNwbA77</a>)and register a BSC address holding a minimum of 1 million HIP tokens.<br/><br/>The link to buy HIP on Pancake:(<a href='https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b' target='_blank'>https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b</a>)<br/><br/>② The number of IQT(s) won by each BSC address varies in accordance to its HIP token holdings:<br/><br/>1 million — 5 million Hip tokens: 1 IQT<br/>> 5 million — 10 million Hip tokens: 2 IQTs<br/>> 10 million — 50 million Hip tokens: 3 IQTs<br/>> 50 million Hip tokens: 4 IQTs<br/><br/>③Winners of the lottery can use their IQT(s) to swap CYN (Cycan Network) tokens on a designated website which will be announced nearer to or on the lottery date itself. (100 CYN tokens per IQT costs a total of 10 BUSD/USDT)Lottery winners can only use BUSD or USDT to swap CYN tokens.",
+      "join": "Join IDO"
     },
     "activity": {
       "title": "AirDrops",
@@ -51,6 +58,13 @@
       "tips02": " to exchange HIP-USDT",
       "tips03": "2. Follow us on ",
       "tips04": ", further airdrop info will be released before 30th June."
+    },
+    "IDOModel": {
+      "IQTBanlace":"IQT Banlace",
+      "swapQuantity": "Swap Quantity",
+      "maxQuantity": "最多可兑换：",
+      "swapCYN": "兑换CYN",
+      "placeholder": "请输入兑换数量"
     }
   },
   "lotteryResult": {

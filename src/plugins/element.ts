@@ -7,7 +7,9 @@ import {
   ElTable,
   ElTableColumn,
   ElPagination,
-  ElPopover
+  ElPopover,
+  ElSelect,
+  ElOption
 } from 'element-plus'
 import '../element-variables.scss'
 
@@ -20,4 +22,6 @@ export default (app: App) => {
   app.use(ElTableColumn)
   app.use(ElPagination)
   app.use(ElPopover)
+  app.use(ElSelect)
+  app.use(ElOption)
 }
