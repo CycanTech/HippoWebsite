@@ -63,7 +63,14 @@
       "swapQuantity": "兑换数量",
       "maxQuantity": "最多可兑换：",
       "swapCYN": "兑换CYN",
-      "placeholder": "请输入兑换数量"
+      "placeholder": "请输入兑换数量",
+      "approve": "授权",
+      "approved": "已授权",
+      "approveSuccess": "授权成功",
+      "approveFailed": "授权失败",
+      "insufficient": "余额不足",
+      "swapSuccess": "兑换成功",
+      "swapFailed": "兑换失败"
     }
   },
   "lotteryResult": {

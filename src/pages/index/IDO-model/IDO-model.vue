@@ -11,7 +11,7 @@
             <el-button size="small" round v-if="isConnected" @click="onDisconnect">
               {{ t('message.disconnect') }}
             </el-button>
-            <el-button size="small" round v-else @click="onConnect" :loading="isConnecting">
+            <el-button size="small" type="primary" round v-else @click="onConnect" :loading="isConnecting">
               {{ t('message.connectWallet') }}
             </el-button>
           </div>
@@ -21,12 +21,10 @@
             {{ t('message.index.IDOModel.IQTBanlace') }}
           </div>
           <div class="IQT-banlace">
+            <i class="el-icon-loading" v-if="isLoadingIQT"></i>
             {{ IQTBanlace ? amountToDecimal(formatAmount(IQTBanlace)) : '-' }}
           </div>
           <div class="stablecoin-banlace">
-            <div class="stablecoin">
-              {{ stablecoinBanlace ? amountToDecimal(formatAmount(stablecoinBanlace)) : '-' }}
-            </div>
             <el-select class="select" size="small" v-model="stablecoin" placeholder="请选择">
               <el-option
                 v-for="item in stablecoins"
@@ -36,6 +34,10 @@
               >
               </el-option>
             </el-select>
+            <div class="stablecoin">
+              <i class="el-icon-loading" v-if="isLoadingStablecoin"></i>
+              {{ stablecoinBanlace ? amountToDecimal(formatAmount(stablecoinBanlace)) : '-' }}
+            </div>
           </div>
         </div>
         <div class="swap-number">
@@ -45,21 +47,55 @@
             </div>
             <div>
               <span> {{ t('message.index.IDOModel.maxQuantity') }}</span>
-              <span class="quantity">{{ maxQuantity ?? '-' }} </span>
+              <span class="quantity">
+                {{ maxSwapQuantity ? amountToDecimal(formatAmount(maxSwapQuantity)) : '-' }}
+              </span>
             </div>
           </div>
           <input
             type="text"
             :placeholder="t('message.index.IDOModel.placeholder')"
-            v-model="swapQuantity"
+            v-model="baseSwapQuantity"
             @change="checkSwapQuantity"
           />
         </div>
-        <div class="swap">
+        <div class="tips" v-if="isInsufficientStablecoinBanlace || isInsufficientIQTBanlace">
+          {{ isInsufficientStablecoinBanlace ? stablecoinLabels[stablecoin] : 'IQT' }}
+          {{ t('message.index.IDOModel.insufficient') }}
+        </div>
+        <div class="approves" v-if="isConnected && (!isStablecoinApproved || !isIQTApproved)">
           <el-button
             round
-            @click="onReceiveAirdrop"
-            :disabled="!isConnected"
+            @click="onApprove(stablecoin, false)"
+            :disabled="isStablecoinApproved || !isConnected"
+            :loading="isLoadingStablecoinApprove"
+            type="primary"
+            size="medium"
+          >
+            <template v-if="isStablecoinApproved">
+              {{ t('message.index.IDOModel.approved') }}
+            </template>
+            <template v-else>{{ t('message.index.IDOModel.approve') }}</template>
+            {{ stablecoinLabels[stablecoin] }}
+          </el-button>
+          <el-button
+            round
+            @click="onApprove(IQT_TOKEN_ADDRESS, true)"
+            :disabled="isIQTApproved || !isConnected"
+            :loading="isLoadingIQTApprove"
+            type="primary"
+            size="medium"
+          >
+            <template v-if="isIQTApproved">{{ t('message.index.IDOModel.approved') }}</template>
+            <template v-else>{{ t('message.index.IDOModel.approve') }}</template>
+            IQT
+          </el-button>
+        </div>
+        <div class="swap" v-else>
+          <el-button
+            round
+            @click="onSwap"
+            :disabled="swapButtonDisabled"
             type="primary"
             size="medium"
           >
@@ -78,32 +114,37 @@
 import { defineComponent, ref, onMounted, computed, watch } from 'vue'
 import { ElMessage, ElLoading } from 'element-plus'
 import { getContract, shortenAddress } from '@/common/ts/utils'
-import { formatAmount, amountToDecimal } from '@/common/ts/amount'
+import { parseAmount, formatAmount, amountToDecimal } from '@/common/ts/amount'
 import getProvider from '@/common/ts/getProvider'
 import getWeb3 from '@/common/ts/getWeb3'
 import getBalance from '@/common/ts/getBalance'
 import Popup from '@/components/popup/popup.vue'
-import {
-  // AIRDROP_ADDRESS_V2,
-  IQT_TOKEN_ADDRESS
-  // HIPPO_ADDRESS,
-  // SPENDER_ADDRESS
-} from '@/common/ts/const'
-// import airdropV2 from '@/abi/airdropV2.json'
-import test from '@/abi/test.json'
+import { IQT_TOKEN_ADDRESS, IOD_SWAP_ADDRESS, ZERO } from '@/common/ts/const'
+import {abi as IDOSwapABI} from '@/abi/IDOSwap.json'
 import { useI18n } from 'vue-i18n'
 import JSBI from 'jsbi'
+import getApproved from '@/common/ts/getApproved'
+import approve from '@/common/ts/approve'
 
+// const stablecoins = [
+//   { value: '0x55d398326f99059ff775485246999027b3197955', label: 'USDT' },
+//   { value: '0xe9e7cea3dedca5984780bafc599bd69add087d56', label: 'BUSD' }
+// ]
 const stablecoins = [
-  { value: '0x55d398326f99059ff775485246999027b3197955', label: 'USDT' },
-  { value: '0xe9e7cea3dedca5984780bafc599bd69add087d56', label: 'BUST' }
+  { value: '0x0b57f8b81959175424a77E916d72C7175E68E1a2', label: 'USDT' },
+  { value: '0x0C97BfFAA448eA2E46D727adD6038e6Db25c7409', label: 'BUSD' }
 ]
-
+const stablecoinLabels: { [key: string]: string } = {}
+stablecoins.map(item => {
+  stablecoinLabels[item.value] = item.label
+})
 export interface IDOModelApi {
   changeIDOModelDisplay: () => void
 }
 
-const SWAP_RATE = JSBI.BigInt(100)
+const BIG_ONE = JSBI.BigInt('1000000000000000000')
+const CYN_RATE = JSBI.BigInt(100)
+const STABLECOIN_RATE = JSBI.BigInt(10)
 
 export default defineComponent({
   components: { Popup },
@@ -112,18 +153,78 @@ export default defineComponent({
 
     const showModel = ref(false)
     const userAccount = ref<string>()
-    const isLoading = ref(false)
     const isConnected = computed(() => userAccount.value !== undefined)
     const isConnecting = ref(false)
+    const isLoadingIQT = ref(false)
+    const isLoadingStablecoinApprove = ref(false)
+    const isLoadingIQTApprove = ref(false)
+    const isLoadingStablecoin = ref(false)
     const stablecoin = ref(stablecoins[0].value)
-    const stablecoinBanlace = ref<string>()
-    const IQTBanlace = ref<string>()
-    const swapQuantity = ref<string | number>()
-    const maxQuantity = computed(() => {
+    const stablecoinBanlace = ref<JSBI>()
+    const isIQTApproved = ref(false)
+    const isStablecoinApproved = ref(false)
+    const IQTBanlace = ref<JSBI>()
+    const baseSwapQuantity = ref<string | number>()
+    const parsedSwapQuantity = computed(() => {
+      if (!baseSwapQuantity.value) {
+        return undefined
+      }
+      try {
+        return JSBI.BigInt(parseAmount(baseSwapQuantity.value.toString()))
+      } catch (error) {
+        return undefined
+      }
+    })
+    const maxSwapQuantity = computed(() => {
       if (IQTBanlace.value === undefined) {
         return undefined
       }
-      return JSBI.multiply(SWAP_RATE, JSBI.BigInt(IQTBanlace.value)).toString()
+      return JSBI.multiply(CYN_RATE, IQTBanlace.value).toString()
+    })
+    const parsedStablecoinAndIQTAmounts = computed(() => {
+      if (parsedSwapQuantity.value === undefined) {
+        return undefined
+      }
+      //100CYN = 1IQT + 10(USDT|BUSD)
+      return {
+        stablecoinAmount: JSBI.divide(parsedSwapQuantity.value, STABLECOIN_RATE),
+        IQTAmount: JSBI.divide(parsedSwapQuantity.value, CYN_RATE)
+      }
+    })
+    const isInsufficientStablecoinBanlace = computed(() => {
+      if (!parsedStablecoinAndIQTAmounts.value || !stablecoinBanlace.value) {
+        return false
+      }
+      const { stablecoinAmount } = parsedStablecoinAndIQTAmounts.value
+      return JSBI.lessThan(stablecoinBanlace.value, stablecoinAmount)
+    })
+    const isInsufficientIQTBanlace = computed(() => {
+      if (!parsedStablecoinAndIQTAmounts.value || !IQTBanlace.value) {
+        return false
+      }
+      const { IQTAmount } = parsedStablecoinAndIQTAmounts.value
+      return JSBI.lessThan(IQTBanlace.value, IQTAmount)
+    })
+    const swapButtonDisabled = computed(() => {
+      if (
+        !isConnected.value ||
+        !parsedStablecoinAndIQTAmounts.value ||
+        !IQTBanlace.value ||
+        !stablecoinBanlace.value
+      ) {
+        return true
+      }
+      if (JSBI.equal(ZERO, IQTBanlace.value) || JSBI.equal(ZERO, stablecoinBanlace.value)) {
+        return true
+      }
+      const { IQTAmount } = parsedStablecoinAndIQTAmounts.value
+      if (JSBI.greaterThan(JSBI.remainder(IQTAmount, BIG_ONE), ZERO)) {
+        return true
+      }
+      if (isInsufficientStablecoinBanlace.value || isInsufficientIQTBanlace.value) {
+        return true
+      }
+      return false
     })
 
     const _watchAccountsChange = () => {
@@ -138,32 +239,63 @@ export default defineComponent({
       if (!userAccount.value) {
         return
       }
-      IQTBanlace.value = await getBalance(IQT_TOKEN_ADDRESS, userAccount.value)
+      isLoadingIQT.value = true
+      const banlace = await getBalance(IQT_TOKEN_ADDRESS, userAccount.value)
+      IQTBanlace.value = JSBI.BigInt(banlace)
+      isLoadingIQT.value = false
     }
     const _getStablecoinBanlace = async () => {
       if (!userAccount.value) {
         return
       }
-      stablecoinBanlace.value = await getBalance(stablecoin.value, userAccount.value)
+      isLoadingStablecoin.value = true
+      const banlace = await getBalance(stablecoin.value, userAccount.value)
+      stablecoinBanlace.value = JSBI.BigInt(banlace)
+      isLoadingStablecoin.value = false
+    }
+    const _getIQTApproved = async () => {
+      if (!userAccount.value) {
+        return
+      }
+      isLoadingIQTApprove.value = true
+      isIQTApproved.value = await getApproved(
+        IQT_TOKEN_ADDRESS,
+        IOD_SWAP_ADDRESS,
+        userAccount.value
+      )
+      isLoadingIQTApprove.value = false
+    }
+    const _getStablecoinApproved = async () => {
+      if (!userAccount.value) {
+        return
+      }
+      isLoadingStablecoinApprove.value = true
+      isStablecoinApproved.value = await getApproved(
+        stablecoin.value,
+        IOD_SWAP_ADDRESS,
+        userAccount.value
+      )
+      isLoadingStablecoinApprove.value = false
     }
     const _getUserInfo = async () => {
       _getStablecoinBanlace()
       _getIQTBanlace()
+      _getIQTApproved()
+      _getStablecoinApproved()
     }
     const checkSwapQuantity = () => {
-      let num: string | number | undefined = swapQuantity.value?.toString()
+      let num: string | number | undefined = baseSwapQuantity.value?.toString()
       num = num ? num.replace(/[^\d]/g, '') : ''
       if (num.indexOf('.') < 0 && num != '') {
         num = parseInt(num)
       }
-      swapQuantity.value = num
+      baseSwapQuantity.value = num
     }
     const changeIDOModelDisplay = () => {
       showModel.value = !showModel.value
     }
     const onConnect = async () => {
       const provider = getProvider()
-
       if (!provider) {
         ElMessage.warning({
           message: 'Failed to connect to wallet.',
@@ -171,7 +303,6 @@ export default defineComponent({
         })
         return
       }
-
       isConnecting.value = true
       const [address] = (await provider.enable()) as string[]
       isConnecting.value = false
@@ -179,42 +310,58 @@ export default defineComponent({
       _getUserInfo()
     }
     const onDisconnect = () => {
-      userAccount.value = ''
+      userAccount.value = undefined
+      baseSwapQuantity.value = undefined
+      IQTBanlace.value = undefined
+      stablecoinBanlace.value = undefined
+      isIQTApproved.value = false
+      isStablecoinApproved.value = false
     }
-    const onReceiveAirdrop = async () => {
-      const contract = getContract(test, '0xc4c4c0f6b706edc073b3ff21c86fd783bef337fb', getWeb3())
-      const swapTokensForExactTokens = contract.methods.swapTokensForExactTokens(
-        [
-          '0xae13d989dac2f0debff460ac112a837c89baa7cd',
-          '0x7ef95a0fee0dd31b22626fa2e10ee6a223f8a684',
-          '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7',
-          '0xae13d989dac2f0debff460ac112a837c89baa7cd'
-        ],
-        userAccount.value
+    const onApprove = async (tokenAddress: string, isApproveIQT: boolean) => {
+      if (!userAccount.value) {
+        return
+      }
+      isApproveIQT ? (isLoadingIQTApprove.value = true) : (isLoadingStablecoinApprove.value = true)
+      const hasApproved = await approve(tokenAddress, IOD_SWAP_ADDRESS, userAccount.value)
+      if (hasApproved) {
+        ElMessage.success(t('message.index.IDOModel.approveSuccess'))
+        isApproveIQT ? (isIQTApproved.value = true) : (isStablecoinApproved.value = true)
+      } else {
+        ElMessage.warning(t('message.index.IDOModel.approveFailed'))
+      }
+      isApproveIQT
+        ? (isLoadingIQTApprove.value = false)
+        : (isLoadingStablecoinApprove.value = false)
+    }
+    const onSwap = async () => {
+      if (parsedStablecoinAndIQTAmounts.value === undefined) {
+        return
+      }
+      const { stablecoinAmount } = parsedStablecoinAndIQTAmounts.value
+      const contract = getContract(IDOSwapABI, IOD_SWAP_ADDRESS, getWeb3())
+      const isUSDT = stablecoin.value === stablecoins[0].value
+      const swap = contract.methods[isUSDT ? 'swapUsdtAndIqtForCyn' : 'swapBusdAndIqtForCyn'](
+        stablecoinAmount.toString()
       )
       const loading = ElLoading.service({ fullscreen: true, background: 'rgba(0,0,0 0.7)' })
       try {
-        const output = await swapTokensForExactTokens.send({
-          from: userAccount.value,
-          value: '10000000000000000'
-        })
-        console.log('output', output)
-        ElMessage.success('调用成功')
-        loading.close()
+        await swap.send({ from: userAccount.value })
+        baseSwapQuantity.value = undefined
+        _getUserInfo()
+        ElMessage.success(t('message.index.IDOModel.swapSuccess'))
       } catch (error) {
-        loading.close()
         if (error?.code !== 4001) {
-          ElMessage.warning({
-            message: 'Receive airdrop failed.',
-            type: 'warning'
-          })
-          console.log('ReceiveAirdropTokenFrom Error', error)
+          ElMessage.warning(t('message.index.IDOModel.swapFailed'))
+          console.log('Swap Error', error)
         }
+      } finally {
+        loading.close()
       }
     }
 
     watch([stablecoin], () => {
       _getStablecoinBanlace()
+      _getStablecoinApproved()
     })
 
     onMounted(() => {
@@ -230,24 +377,34 @@ export default defineComponent({
       userAccount,
 
       stablecoins,
-      stablecoin,
+      stablecoinLabels,
+      IQT_TOKEN_ADDRESS,
 
+      stablecoin,
       IQTBanlace,
       stablecoinBanlace,
+      baseSwapQuantity,
+      maxSwapQuantity,
 
-      swapQuantity,
-      maxQuantity,
-
+      isInsufficientStablecoinBanlace,
+      isInsufficientIQTBanlace,
+      isLoadingStablecoinApprove,
+      isLoadingIQTApprove,
+      isStablecoinApproved,
+      isIQTApproved,
+      isLoadingStablecoin,
+      isLoadingIQT,
       isConnecting,
       isConnected,
-      isLoading,
+      swapButtonDisabled,
 
       t,
       changeIDOModelDisplay,
       checkSwapQuantity,
       onConnect,
       onDisconnect,
-      onReceiveAirdrop,
+      onSwap,
+      onApprove,
       shortenAddress,
       formatAmount,
       amountToDecimal
@@ -256,7 +413,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../../scss/variable.scss';
 @import '../../../scss/mixin.scss';
 .IDO-model-wrapper {
@@ -295,7 +452,7 @@ export default defineComponent({
         flex: 1;
         height: 36px;
         padding: 0 18px;
-        background: #f2f7fa;
+        background: #f6f7ff;
         border-radius: 18px;
         font-size: 14px;
         font-weight: 400;
@@ -320,13 +477,20 @@ export default defineComponent({
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        position: relative;
         height: 42px;
         padding: 0 15px;
-        background: #c7d0fa;
+        background: #f6f7ff;
+        border: 1px solid rgba(32, 46, 107, 0.2);
         border-radius: 100px;
         font-size: 16px;
         font-weight: 500;
         color: #202e6b;
+        .el-icon-loading {
+          position: absolute;
+          left: 15px;
+          font-size: 20px;
+        }
       }
       .IQT-banlace {
         margin-top: 15px;
@@ -339,8 +503,26 @@ export default defineComponent({
           flex: 2;
         }
         .select {
-          flex: 1;
-          margin-left: 7px;
+          flex: 0 0 90px;
+          margin-right: 7px;
+          height: 42px;
+          .select-trigger {
+            .el-input {
+              .el-input__inner {
+                height: 42px;
+                line-height: 42px;
+                background: #f6f7ff;
+                border-radius: 100px;
+                /* border: 1px solid #202e6b; */
+                color: #202e6b;
+                font-size: 16px;
+              }
+              .el-input__icon {
+                height: 42px;
+                color: #202e6b;
+              }
+            }
+          }
         }
       }
     }
@@ -361,18 +543,38 @@ export default defineComponent({
         outline-style: none;
         text-align: center;
         height: 42px;
-        background: #f6f7ff;
+        background: #fff;
         border-radius: 100px;
-        border: 1px solid rgba(32, 46, 107, 0.2);
+        border: 1px solid #202e6b;
         &::placeholder {
           color: rgba(32, 46, 107, 0.6);
         }
       }
     }
-    .swap {
+    .tips {
+      margin-top: 15px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #ff1e1e;
+      text-align: center;
+    }
+    .swap,
+    .approves {
       padding-top: 40px;
       display: flex;
+    }
+    .approves {
+      justify-content: space-between;
+      button {
+        flex: 1;
+      }
+    }
+    .swap {
       justify-content: center;
+      button {
+        width: 204px;
+        height: 42px;
+      }
     }
   }
 }
