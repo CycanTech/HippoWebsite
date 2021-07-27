@@ -21,8 +21,8 @@
       "understandingHippo": "一分钟了解Hippo"
     },
     "IDO": {
-      "desc": "Cycan Network, our main chain, is about to conduct its IDO using the Hippo IDO platform.<br/><br/>There are a total of 4000 IQTs (IDO Qualification Tickets). Out of these, 500 will be reserved for early contributors, volunteers and active members within the Cycan Network community. The balance of 3,500 IQTs can be won through a random lottery.<br/><br/>With each IQT, you can swap100 CYN (Cycan Network) tokens with 10 BUSD/USDT (0.10 BUSD/USDT per CYN token). <br/>Each BSC address can win multiple IQTs according to the number of HIP tokens held in each wallet at the time of the snapshot, which will be taken on 22nd July 2021.<br/><strong>Please follow the steps below to be eligible for the random lottery of 3,500 IQTs:</strong><br/><br/>① Fill in the Google form (<a href='https://forms.gle/pdfvwvFLQ6VNwbA77' target='_blank'>https://forms.gle/pdfvwvFLQ6VNwbA77</a>)and register a BSC address holding a minimum of 1 million HIP tokens.<br/><br/>The link to buy HIP on Pancake:(<a href='https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b' target='_blank'>https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b</a>)<br/><br/>② The number of IQT(s) won by each BSC address varies in accordance to its HIP token holdings:<br/><br/>1 million — 5 million Hip tokens: 1 IQT<br/>> 5 million — 10 million Hip tokens: 2 IQTs<br/>> 10 million — 50 million Hip tokens: 3 IQTs<br/>> 50 million Hip tokens: 4 IQTs<br/><br/>③Winners of the lottery can use their IQT(s) to swap CYN (Cycan Network) tokens on a designated website which will be announced nearer to or on the lottery date itself. (100 CYN tokens per IQT costs a total of 10 BUSD/USDT)Lottery winners can only use BUSD or USDT to swap CYN tokens.",
-      "join": "参加 IDO"
+      "desc": "Cycan Network主网现已开启IDO。<br/><br/>本轮总计4000个IQT（IDO资格代币），其中，3500个IQT将以抽奖形式发放给HIP持币用户，500个作为Cycan社区激励发放。<br/><br/>IQT抽奖已完成，开奖结果请点击<a href='https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit?usp=sharing' target='_blank'>抽奖结果</a>查看。<br/><br/>每个IQT将获得使用10 BUSD/USDT兑换100个CYN的权益（CYN单价为0.1 BUSD/USDT）。<br/><br/>IQT中奖者仅可使用BUSD或USDT兑换CYN。<br/><br/>如您已中奖，请点击下方“参与CYN IDO”进行CYN兑换。（兑换功能将于 2021/07/28 GMT+8开放）",
+      "join": "参加 CYN IDO"
     },
     "activity": {
       "title": "空投活动",
@@ -59,8 +59,9 @@
       "tips04": "，在6月30日前会不定期发布空投资讯"
     },
     "IDOModel": {
+      "BSCAddress": "BSC钱包地址",
       "IQTBanlace": "IQT 余额",
-      "swapQuantity": "兑换数量",
+      "swapQuantity": "兑换CYN数量<br>（最少100CYN）",
       "maxQuantity": "最多可兑换：",
       "swapCYN": "兑换CYN",
       "placeholder": "请输入兑换数量",
@@ -70,7 +71,9 @@
       "approveFailed": "授权失败",
       "insufficient": "余额不足",
       "swapSuccess": "兑换成功",
-      "swapFailed": "兑换失败"
+      "paymentCurrency": "支付币种",
+      "swap": "兑入",
+      "for": "兑出"
     }
   },
   "lotteryResult": {

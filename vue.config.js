@@ -1,4 +1,4 @@
 module.exports = {
   productionSourceMap: false,
-  outputDir: 'dist_hippo'
+  outputDir: process.env.VUE_APP_BUILD_DIR_NAME
 }

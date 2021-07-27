@@ -21,8 +21,8 @@
       "understandingHippo": "Understanding Hippo within one minute"
     },
     "IDO": {
-      "desc": "Cycan Network, our main chain, is about to conduct its IDO using the Hippo IDO platform.<br/><br/>There are a total of 4000 IQTs (IDO Qualification Tickets). Out of these, 500 will be reserved for early contributors, volunteers and active members within the Cycan Network community. The balance of 3,500 IQTs can be won through a random lottery.<br/><br/>With each IQT, you can swap100 CYN (Cycan Network) tokens with 10 BUSD/USDT (0.10 BUSD/USDT per CYN token). <br/>Each BSC address can win multiple IQTs according to the number of HIP tokens held in each wallet at the time of the snapshot, which will be taken on 22nd July 2021.<br/><strong>Please follow the steps below to be eligible for the random lottery of 3,500 IQTs:</strong><br/><br/>① Fill in the Google form (<a href='https://forms.gle/pdfvwvFLQ6VNwbA77' target='_blank'>https://forms.gle/pdfvwvFLQ6VNwbA77</a>)and register a BSC address holding a minimum of 1 million HIP tokens.<br/><br/>The link to buy HIP on Pancake:(<a href='https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b' target='_blank'>https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b</a>)<br/><br/>② The number of IQT(s) won by each BSC address varies in accordance to its HIP token holdings:<br/><br/>1 million — 5 million Hip tokens: 1 IQT<br/>> 5 million — 10 million Hip tokens: 2 IQTs<br/>> 10 million — 50 million Hip tokens: 3 IQTs<br/>> 50 million Hip tokens: 4 IQTs<br/><br/>③Winners of the lottery can use their IQT(s) to swap CYN (Cycan Network) tokens on a designated website which will be announced nearer to or on the lottery date itself. (100 CYN tokens per IQT costs a total of 10 BUSD/USDT)Lottery winners can only use BUSD or USDT to swap CYN tokens.",
-      "join": "Join IDO"
+      "desc": "Cycan Network, our main chain, is launching its IDO now.<br/><br/>There is a total of 4000 <strong>IQTs</strong> (<strong>IDO Qualification Tickets</strong>). Out of these, 500 will be reserved for early contributors, volunteers and active members within the Cycan Network community. The balance of 3,500 IQTs can be won through a random lottery. The IQTs have been sent to the winners’ addresses. Please check from<a href='https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit?usp=sharing' target='_blank'> the winning list</a>.<br/><br/>With each IQT, you can swap100 CYN (Cycan Network) tokens with 10 BUSD/USDT (<strong>0.10 BUSD/USDT per CYN token</strong>). <br/><br/>Lottery winners can only use BUSD or USDT to swap CYN tokens. <br/><br/>Please tap the “Join CYN IDO” to swap for CYN.(CYN IDO Swap will be launched on 2021/07/28 GMT+8)",
+      "join": "Join CYN IDO"
     },
     "activity": {
       "title": "AirDrops",
@@ -60,18 +60,22 @@
       "tips04": ", further airdrop info will be released before 30th June."
     },
     "IDOModel": {
-      "IQTBanlace":"IQT Banlace",
-      "swapQuantity": "Swap Quantity",
-      "maxQuantity": "最多可兑换：",
-      "swapCYN": "兑换CYN",
-      "placeholder": "请输入兑换数量",
-      "approve": "授权",
-      "approved": "已授权",
-      "approveSuccess": "授权成功",
-      "approveFailed": "授权失败",
-      "insufficient": "余额不足",
-      "swapSuccess": "兑换成功",
-      "swapFailed": "兑换失败"
+      "BSCAddress": "BSC Address",
+      "IQTBanlace": "IQT Banlace",
+      "swapQuantity": "Swap CYN Amount <br/> (Min. 100 CYN)",
+      "maxQuantity": "Max",
+      "swapCYN": "Swap CYN",
+      "placeholder": "Input Swap Amount",
+      "approve": "Approve",
+      "approved": "Approved",
+      "approveSuccess": "Approve Succes",
+      "approveFailed": "Approve Failed",
+      "insufficient": "Insufficient Balance",
+      "swapSuccess": "Swap Success",
+      "swapFailed": "Swap Failed",
+      "paymentCurrency": "Pay by",
+      "swap": "Swap",
+      "for": "For"
     }
   },
   "lotteryResult": {

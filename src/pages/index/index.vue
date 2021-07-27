@@ -20,6 +20,7 @@
       </div>
       <div class="IDO">
         <h1>Cycan IDO</h1>
+        <img class="IDO-banner" src="./IDO.png" />
         <p v-html="t('message.index.IDO.desc')"></p>
         <div class="join">
           <el-button type="primary" size="medium" @click="handleShowIDOModel" round>
@@ -197,6 +198,12 @@ export default defineComponent({
     .IDO {
       background: rgba($color: #aea5f3, $alpha: 0.09);
       padding-bottom: 55px;
+      .IDO-banner {
+        display: block;
+        margin: 100px auto 140px auto;
+        height: 149px;
+        width: auto;
+      }
       p {
         max-width: 1024px;
         margin: 0 auto;
@@ -316,6 +323,12 @@ export default defineComponent({
             font-size: $font-size-large;
             margin: 20px;
           }
+        }
+      }
+      .IDO {
+        .IDO-banner {
+          margin: 50px auto 70px auto;
+          zoom: 0.5;
         }
       }
       .activity-wrapper {

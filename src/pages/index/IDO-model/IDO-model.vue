@@ -2,6 +2,7 @@
   <popup v-model="showModel">
     <div class="IDO-model-wrapper">
       <div class="IDO-model-content">
+        <div class="BSCAddress">{{ t('message.index.IDOModel.BSCAddress') }}</div>
         <div class="address-connect">
           <div class="account">
             <span v-if="isConnected">{{ shortenAddress(userAccount, 7) }}</span>
@@ -11,7 +12,14 @@
             <el-button size="small" round v-if="isConnected" @click="onDisconnect">
               {{ t('message.disconnect') }}
             </el-button>
-            <el-button size="small" type="primary" round v-else @click="onConnect" :loading="isConnecting">
+            <el-button
+              size="small"
+              type="primary"
+              round
+              v-else
+              @click="onConnect"
+              :loading="isConnecting"
+            >
               {{ t('message.connectWallet') }}
             </el-button>
           </div>
@@ -23,6 +31,9 @@
           <div class="IQT-banlace">
             <i class="el-icon-loading" v-if="isLoadingIQT"></i>
             {{ IQTBanlace ? amountToDecimal(formatAmount(IQTBanlace)) : '-' }}
+          </div>
+          <div class="title">
+            {{ t('message.index.IDOModel.paymentCurrency') }}
           </div>
           <div class="stablecoin-banlace">
             <el-select class="select" size="small" v-model="stablecoin" placeholder="请选择">
@@ -42,26 +53,69 @@
         </div>
         <div class="swap-number">
           <div class="tips">
-            <div>
-              {{ t('message.index.IDOModel.swapQuantity') }}
-            </div>
-            <div>
+            <div v-html="t('message.index.IDOModel.swapQuantity')"></div>
+            <div class="max-quantity">
               <span> {{ t('message.index.IDOModel.maxQuantity') }}</span>
               <span class="quantity">
                 {{ maxSwapQuantity ? amountToDecimal(formatAmount(maxSwapQuantity)) : '-' }}
               </span>
             </div>
           </div>
-          <input
-            type="text"
-            :placeholder="t('message.index.IDOModel.placeholder')"
-            v-model="baseSwapQuantity"
-            @change="checkSwapQuantity"
-          />
+          <div class="input-wrap">
+            <input
+              type="text"
+              :placeholder="t('message.index.IDOModel.placeholder')"
+              v-model="baseSwapQuantity"
+              @change="checkSwapQuantity"
+            />
+            <div class="max" @click="onMax">Max</div>
+          </div>
         </div>
-        <div class="tips" v-if="isInsufficientStablecoinBanlace || isInsufficientIQTBanlace">
-          {{ isInsufficientStablecoinBanlace ? stablecoinLabels[stablecoin] : 'IQT' }}
-          {{ t('message.index.IDOModel.insufficient') }}
+        <div class="swap">
+          <div class="label">
+            {{ t('message.index.IDOModel.swap') }}
+          </div>
+          <div class="amounts">
+            <div class="amount">
+              <span>{{
+                parsedStablecoinAndIQTAmounts?.IQTAmount
+                  ? amountToDecimal(
+                      formatAmount(parsedStablecoinAndIQTAmounts.IQTAmount.toString())
+                    )
+                  : '-'
+              }}</span>
+              <span class="symbol">IQT</span>
+            </div>
+            <div class="amount">
+              <span>
+                {{
+                  parsedStablecoinAndIQTAmounts?.stablecoinAmount
+                    ? amountToDecimal(
+                        formatAmount(parsedStablecoinAndIQTAmounts.stablecoinAmount.toString())
+                      )
+                    : '-'
+                }}
+              </span>
+              <span class="symbol">{{ stablecoinLabels[stablecoin] }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="output">
+          <div class="label">
+            {{ t('message.index.IDOModel.for') }}
+          </div>
+          <div class="amounts">
+            <div class="amount">
+              <span>
+                {{
+                  parsedSwapQuantity
+                    ? amountToDecimal(formatAmount(parsedSwapQuantity.toString()))
+                    : '-'
+                }}
+              </span>
+              <span class="symbol">CYN</span>
+            </div>
+          </div>
         </div>
         <div class="approves" v-if="isConnected && (!isStablecoinApproved || !isIQTApproved)">
           <el-button
@@ -91,7 +145,7 @@
             IQT
           </el-button>
         </div>
-        <div class="swap" v-else>
+        <div class="buttons" v-else>
           <el-button
             round
             @click="onSwap"
@@ -101,6 +155,10 @@
           >
             {{ t('message.index.IDOModel.swapCYN') }}
           </el-button>
+        </div>
+        <div class="bottom-tips" v-if="isInsufficientStablecoinBanlace || isInsufficientIQTBanlace">
+          {{ isInsufficientStablecoinBanlace ? stablecoinLabels[stablecoin] : 'IQT' }}
+          {{ t('message.index.IDOModel.insufficient') }}
         </div>
       </div>
       <div class="close">
@@ -120,7 +178,7 @@ import getWeb3 from '@/common/ts/getWeb3'
 import getBalance from '@/common/ts/getBalance'
 import Popup from '@/components/popup/popup.vue'
 import { IQT_TOKEN_ADDRESS, IOD_SWAP_ADDRESS, ZERO } from '@/common/ts/const'
-import {abi as IDOSwapABI} from '@/abi/IDOSwap.json'
+import { abi as IDOSwapABI } from '@/abi/IDOSwap.json'
 import { useI18n } from 'vue-i18n'
 import JSBI from 'jsbi'
 import getApproved from '@/common/ts/getApproved'
@@ -138,6 +196,7 @@ const stablecoinLabels: { [key: string]: string } = {}
 stablecoins.map(item => {
   stablecoinLabels[item.value] = item.label
 })
+
 export interface IDOModelApi {
   changeIDOModelDisplay: () => void
 }
@@ -186,9 +245,14 @@ export default defineComponent({
         return undefined
       }
       //100CYN = 1IQT + 10(USDT|BUSD)
+      const stablecoinAmount = JSBI.divide(parsedSwapQuantity.value, STABLECOIN_RATE)
+      const IQTAmount = JSBI.divide(parsedSwapQuantity.value, CYN_RATE)
+      // if (JSBI.greaterThan(JSBI.remainder(IQTAmount, BIG_ONE), ZERO)) {
+      //   return undefined
+      // }
       return {
-        stablecoinAmount: JSBI.divide(parsedSwapQuantity.value, STABLECOIN_RATE),
-        IQTAmount: JSBI.divide(parsedSwapQuantity.value, CYN_RATE)
+        stablecoinAmount,
+        IQTAmount
       }
     })
     const isInsufficientStablecoinBanlace = computed(() => {
@@ -358,6 +422,11 @@ export default defineComponent({
         loading.close()
       }
     }
+    const onMax = () => {
+      baseSwapQuantity.value = maxSwapQuantity.value
+        ? formatAmount(maxSwapQuantity.value.toString())
+        : ''
+    }
 
     watch([stablecoin], () => {
       _getStablecoinBanlace()
@@ -385,6 +454,8 @@ export default defineComponent({
       stablecoinBanlace,
       baseSwapQuantity,
       maxSwapQuantity,
+      parsedStablecoinAndIQTAmounts,
+      parsedSwapQuantity,
 
       isInsufficientStablecoinBanlace,
       isInsufficientIQTBanlace,
@@ -405,6 +476,7 @@ export default defineComponent({
       onDisconnect,
       onSwap,
       onApprove,
+      onMax,
       shortenAddress,
       formatAmount,
       amountToDecimal
@@ -442,6 +514,12 @@ export default defineComponent({
     @include smallMobile {
       width: 280px;
       padding: 15px;
+    }
+    .BSCAddress {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(32, 46, 107, 0.6);
+      margin-bottom: 15px;
     }
     .address-connect {
       display: flex;
@@ -493,12 +571,12 @@ export default defineComponent({
         }
       }
       .IQT-banlace {
-        margin-top: 15px;
+        margin: 15px 0;
       }
       .stablecoin-banlace {
         display: flex;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 15px;
         .stablecoin {
           flex: 2;
         }
@@ -530,51 +608,115 @@ export default defineComponent({
       .tips {
         display: flex;
         justify-content: space-between;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 500;
         color: rgba(32, 46, 107, 0.6);
         margin: 14px 0;
-        .quantity {
-          color: #202e6b;
+        .max-quantity {
+          display: flex;
+          align-items: center;
+          .quantity {
+            color: #202e6b;
+            margin-left: 5px;
+          }
         }
       }
-      input {
-        width: 100%;
-        outline-style: none;
-        text-align: center;
-        height: 42px;
-        background: #fff;
+      .input-wrap {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
         border-radius: 100px;
         border: 1px solid #202e6b;
-        &::placeholder {
-          color: rgba(32, 46, 107, 0.6);
+        height: 42px;
+        input {
+          flex: 1;
+          outline-style: none;
+          text-align: center;
+          background: #fff;
+          height: 42px;
+          border: 0;
+          padding: 0 15px;
+          &::placeholder {
+            color: rgba(32, 46, 107, 0.6);
+          }
+        }
+        .max {
+          text-align: center;
+          cursor: pointer;
+          width: 65px;
+          height: 42px;
+          line-height: 42px;
+          background: #202e6b;
+          border-radius: 0px 100px 100px 0px;
+          color: #fff;
         }
       }
     }
-    .tips {
-      margin-top: 15px;
-      font-size: 14px;
-      font-weight: 400;
-      color: #ff1e1e;
-      text-align: center;
-    }
     .swap,
+    .output {
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      padding: 15px 0;
+      .label {
+        position: absolute;
+        left: 0;
+        top: 15px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #202e6b;
+      }
+      .amounts {
+        .amount {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          font-size: 14px;
+          color: #202e6b;
+          .symbol {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+    .swap {
+      margin-top: 5px;
+      .amounts {
+        .amount {
+          &:last-child {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+    .output {
+      border-top: 1px solid rgba($color: #e8e9f4, $alpha: 0.59);
+    }
+    .buttons,
     .approves {
-      padding-top: 40px;
+      padding-top: 15px;
       display: flex;
     }
     .approves {
       justify-content: space-between;
       button {
         flex: 1;
+        padding: 10px;
       }
     }
-    .swap {
+    .buttons {
       justify-content: center;
       button {
         width: 204px;
         height: 42px;
       }
+    }
+    .bottom-tips {
+      margin-top: 15px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #ff1e1e;
+      text-align: center;
     }
   }
 }
