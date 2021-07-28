@@ -3,6 +3,8 @@ node_modules
 /dist
 dist*/
 /hippo_cycan_io
+/hippo_cycan_network
+/elptest01_cycan_network
 
 # local env files
 .env.local
