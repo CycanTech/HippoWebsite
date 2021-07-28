@@ -6,7 +6,6 @@
   "header": {
     "menu": {
       "desc": "HIPPO",
-      "airdrop": "AirDrops",
       "rank": "Holders",
       "contact": "Contact",
       "whitepaper": "Whitepaper",
@@ -21,8 +20,8 @@
       "understandingHippo": "Understanding Hippo within one minute"
     },
     "IDO": {
-      "desc": "Cycan Network, our main chain, is launching its IDO now.<br/><br/>There is a total of 4000 <strong>IQTs</strong> (<strong>IDO Qualification Tickets</strong>). Out of these, 500 will be reserved for early contributors, volunteers and active members within the Cycan Network community. The balance of 3,500 IQTs can be won through a random lottery. The IQTs have been sent to the winners’ addresses. Please check from<a href='https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit?usp=sharing' target='_blank'> the winning list</a>.<br/><br/>With each IQT, you can swap100 CYN (Cycan Network) tokens with 10 BUSD/USDT (<strong>0.10 BUSD/USDT per CYN token</strong>). <br/><br/>Lottery winners can only use BUSD or USDT to swap CYN tokens. <br/><br/>Please tap the “Join CYN IDO” to swap for CYN.(CYN IDO Swap will be launched on 2021/07/28 GMT+8)",
-      "join": "Join CYN IDO"
+      "desc": "Cycan Network HDO<br/><br/>Cycan Network, our main chain, is launching its HDO now on Hippo HDO platform.<br/><br/>There are a total of 20,000 IQTs (IDO Qualification Tickets).<br/><br/>Out of these：<br/><br/>3,500 IQTs were won through a random lottery. <br/><br/>500 IQTs reserved for early contributors, volunteers and active members within the Cycan Network community.<br/><br/>1,000 IQTs were obtained in exchange for HIPS.<br/><br/>15,000 IQTs were obtained via public burning of the HIP token.<br/><br/>IQT Smart Contract Address:<br/>0x93d2fDF858Ef4Dce8EC5b011CC6C6057e706E17A<br/><br/>The IQTs have been sent to the winners’ addresses. <br/>Please check from the winning list:<br/><a href='https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0' target='_blank'>https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0</a><br/><br/>With each IQT, you can swap 100 CYN (Cycan Network) tokens for 10 BUSD/USDT (0.10 BUSD/USDT per CYN token).<br/><br/>Lottery winners can only use BUSD or USDT(BEP20) to swap CYN tokens.<br/><br/>Please tap the “Join CYN HDO” to swap for CYN：",
+      "join": "Join CYN HDO"
     },
     "activity": {
       "title": "AirDrops",
@@ -62,6 +61,7 @@
     "IDOModel": {
       "BSCAddress": "BSC Address",
       "IQTBanlace": "IQT Banlace",
+      "CYNBanlace": "CYN Banlace :",
       "swapQuantity": "Swap CYN Amount <br/> (Min. 100 CYN)",
       "maxQuantity": "Max",
       "swapCYN": "Swap CYN",
@@ -73,7 +73,7 @@
       "insufficient": "Insufficient Balance",
       "swapSuccess": "Swap Success",
       "swapFailed": "Swap Failed",
-      "paymentCurrency": "Pay by",
+      "paymentCurrency": "Swap from",
       "swap": "Swap",
       "for": "For"
     }

@@ -71,6 +71,12 @@
             <div class="max" @click="onMax">Max</div>
           </div>
         </div>
+        <div class="CYN-banlace">
+          <span>{{ t('message.index.IDOModel.CYNBanlace') }}</span>
+          <span class="amount">
+            {{ CYNBanlaceAmount ? amountToDecimal(formatAmount(CYNBanlaceAmount)) : '-' }}
+          </span>
+        </div>
         <div class="swap">
           <div class="label">
             {{ t('message.index.IDOModel.swap') }}
@@ -177,20 +183,16 @@ import getProvider from '@/common/ts/getProvider'
 import getWeb3 from '@/common/ts/getWeb3'
 import getBalance from '@/common/ts/getBalance'
 import Popup from '@/components/popup/popup.vue'
-import { IQT_TOKEN_ADDRESS, IOD_SWAP_ADDRESS, ZERO } from '@/common/ts/const'
+import { IQT_TOKEN_ADDRESS, IOD_SWAP_ADDRESS, ZERO, CYN_ADDRESS } from '@/common/ts/const'
 import { abi as IDOSwapABI } from '@/abi/IDOSwap.json'
 import { useI18n } from 'vue-i18n'
 import JSBI from 'jsbi'
 import getApproved from '@/common/ts/getApproved'
 import approve from '@/common/ts/approve'
 
-// const stablecoins = [
-//   { value: '0x55d398326f99059ff775485246999027b3197955', label: 'USDT' },
-//   { value: '0xe9e7cea3dedca5984780bafc599bd69add087d56', label: 'BUSD' }
-// ]
 const stablecoins = [
-  { value: '0x0b57f8b81959175424a77E916d72C7175E68E1a2', label: 'USDT' },
-  { value: '0x0C97BfFAA448eA2E46D727adD6038e6Db25c7409', label: 'BUSD' }
+  { value: '0x55d398326f99059ff775485246999027b3197955', label: 'USDT' },
+  { value: '0xe9e7cea3dedca5984780bafc599bd69add087d56', label: 'BUSD' }
 ]
 const stablecoinLabels: { [key: string]: string } = {}
 stablecoins.map(item => {
@@ -220,6 +222,7 @@ export default defineComponent({
     const isLoadingStablecoin = ref(false)
     const stablecoin = ref(stablecoins[0].value)
     const stablecoinBanlace = ref<JSBI>()
+    const CYNBanlaceAmount = ref<JSBI>()
     const isIQTApproved = ref(false)
     const isStablecoinApproved = ref(false)
     const IQTBanlace = ref<JSBI>()
@@ -317,6 +320,13 @@ export default defineComponent({
       stablecoinBanlace.value = JSBI.BigInt(banlace)
       isLoadingStablecoin.value = false
     }
+    const _getCYNBanlaceAmount = async () => {
+      if (!userAccount.value) {
+        return
+      }
+      const banlace = await getBalance(CYN_ADDRESS, userAccount.value)
+      CYNBanlaceAmount.value = JSBI.BigInt(banlace)
+    }
     const _getIQTApproved = async () => {
       if (!userAccount.value) {
         return
@@ -343,6 +353,7 @@ export default defineComponent({
     }
     const _getUserInfo = async () => {
       _getStablecoinBanlace()
+      _getCYNBanlaceAmount()
       _getIQTBanlace()
       _getIQTApproved()
       _getStablecoinApproved()
@@ -452,6 +463,7 @@ export default defineComponent({
       stablecoin,
       IQTBanlace,
       stablecoinBanlace,
+      CYNBanlaceAmount,
       baseSwapQuantity,
       maxSwapQuantity,
       parsedStablecoinAndIQTAmounts,
@@ -608,7 +620,7 @@ export default defineComponent({
       .tips {
         display: flex;
         justify-content: space-between;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
         color: rgba(32, 46, 107, 0.6);
         margin: 14px 0;
@@ -652,6 +664,16 @@ export default defineComponent({
         }
       }
     }
+    .CYN-banlace {
+      display: flex;
+      font-size: 14px;
+      font-weight: 500;
+      color: #202e6b;
+      margin-top: 15px;
+      .amount {
+        margin-left: 5px;
+      }
+    }
     .swap,
     .output {
       display: flex;
@@ -675,12 +697,12 @@ export default defineComponent({
           color: #202e6b;
           .symbol {
             margin-left: 5px;
+            width: 40px;
           }
         }
       }
     }
     .swap {
-      margin-top: 5px;
       .amounts {
         .amount {
           &:last-child {

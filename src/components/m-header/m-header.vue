@@ -8,8 +8,8 @@
         <div class="nav" @click="scrollToControl('desc')">
           {{ t('message.header.menu.desc') }}
         </div>
-        <div class="nav" @click="scrollToControl('activity')">
-          {{ t('message.header.menu.airdrop') }}
+        <div class="nav" @click="scrollToControl('IDO')">
+          Cycna HDO
         </div>
         <div class="nav">
           <a :href="whitepapers[locale]" target="_blank">
@@ -51,8 +51,8 @@
           <div class="nav" @click="scrollToControl('desc')">
             {{ t('message.header.menu.desc') }}
           </div>
-          <div class="nav" @click="scrollToControl('activity')">
-            {{ t('message.header.menu.airdrop') }}
+          <div class="nav" @click="scrollToControl('IDO')">
+             Cycna HDO
           </div>
           <div class="nav">
             <a :href="whitepapers[locale]" target="_blank">

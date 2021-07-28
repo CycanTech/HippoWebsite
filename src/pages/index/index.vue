@@ -18,8 +18,8 @@
           </div>
         </div>
       </div>
-      <div class="IDO">
-        <h1>Cycan IDO</h1>
+      <div class="IDO" id="IDO">
+        <h1>Cycan HDO</h1>
         <img class="IDO-banner" src="./IDO.png" />
         <p v-html="t('message.index.IDO.desc')"></p>
         <div class="join">
@@ -105,7 +105,7 @@ export default defineComponent({
 
     const tabs = ref(tabList)
     const airdropModel = ref<AirdropModelApi>()
-     const IODModel = ref<IDOModelApi>()
+    const IODModel = ref<IDOModelApi>()
 
     const handleShowAirdropModel = () => {
       airdropModel.value?.changeAirdropModelDisplay()
