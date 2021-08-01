@@ -21,7 +21,7 @@
     },
     "IDO": {
       "desc": "关于Cycan主网在Hippo HDO平台的兑换<br/><br/>本轮总计20,000个IQT（HDO资格代币）<br/><br/>其中:<br/>3,500个IQT 以抽奖形式发放给HIP持币用户；<br/>500个IQT 作为Cycan社区激励发放；<br/>1,000个IQT 通过HIPS兑换获得；<br/>15,000 个IQT 通过社区公开销毁HIP代币获得。<br/><br/>IQT合约地址：0x93d2fDF858Ef4Dce8EC5b011CC6C6057e706E17A<br/><br/>CYN合约地址：0x8BAc919fBca13d67e9f901BF41537931effF0E7D<br/><br/>IQT抽奖已完成，开奖结果请点击抽奖结果查看:<br/><br/><a href='https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0' target='_blank'>https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0</a><br/><br/>每个IQT将获得使用10 BUSD/USDT（BEP20）兑换100个CYN的权益（1CYN兑率为0.1 BUSD/USDT）。<br/><br/>IQT中奖者仅可使用BUSD或USDT（BEP20）兑换CYN。<br/><br/>如您已中奖，请点击页面下方“参与CYN HDO”进行CYN兑换：",
-      "join": "参加 CYN HDO"
+      "join": "兑换已截止"
     },
     "activity": {
       "title": "空投活动",

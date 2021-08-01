@@ -23,7 +23,7 @@
         <img class="IDO-banner" src="./IDO.png" />
         <p v-html="t('message.index.IDO.desc')"></p>
         <div class="join">
-          <el-button type="primary" size="medium" @click="handleShowIDOModel" round>
+          <el-button type="primary" size="medium" @click="handleShowIDOModel" round :disabled="true">
             {{ t('message.index.IDO.join') }}
           </el-button>
         </div>
