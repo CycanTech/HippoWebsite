@@ -94,8 +94,8 @@ const whitepapers = {
   [LOCALES.EN]: '/whitepaper/HIPPOLitePaper.pdf'
 }
 const stakingLinks = {
-  [LOCALES.ZH]: 'https://hipdefi.cycan.network/#/zh/index',
-  [LOCALES.EN]: 'https://hipfarm.cycan.network/#/en/index'
+  [LOCALES.ZH]: 'https://hipdefi.cycan.network/#/zh-CN',
+  [LOCALES.EN]: 'https://hipfarm.cycan.network/#/en-US'
 }
 const gameLinks = {
   [LOCALES.ZH]: 'https://global.hippogame.org/#/zh-CN',
