@@ -21,6 +21,20 @@ export const SOCIAL_LINKS = [
       [LOCALES.ZH]: 'https://coinmarketcap.com/currencies/hippo-token/'
     },
     img: require('./img/coinmarketcap.png')
+  },
+  {
+    links: {
+      [LOCALES.EN]: 'https://bscscan.com/token/0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b',
+      [LOCALES.ZH]: 'https://bscscan.com/token/0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b'
+    },
+    img: require('./img/bsc.png')
+  },
+  {
+    links: {
+      [LOCALES.EN]: 'https://www.coingecko.com/en/coins/hippo-token/',
+      [LOCALES.ZH]: 'https://www.coingecko.com/en/coins/hippo-token/'
+    },
+    img: require('./img/coingecko.png')
   }
 ]
 
