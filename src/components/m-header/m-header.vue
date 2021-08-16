@@ -102,8 +102,8 @@ const gameLinks = {
   [LOCALES.EN]: 'https://global.hippogame.org/#/en-US'
 }
 const docLinks = {
-  [LOCALES.ZH]: 'https://docs.hippogame.org/v/cn/',
-  [LOCALES.EN]: 'https://docs.hippogame.org/'
+  [LOCALES.ZH]: 'https://help.hippogame.org/v/cn/',
+  [LOCALES.EN]: 'https://help.hippogame.org/'
 }
 
 export default defineComponent({
