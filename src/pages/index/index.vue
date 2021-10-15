@@ -20,12 +20,33 @@
       </div>
       <div class="IDO" id="IDO">
         <h1>Cycan HDO</h1>
-        <img class="IDO-banner" src="./IDO.png" />
-        <p v-html="t('message.index.IDO.desc')"></p>
-        <div class="join">
-          <el-button type="primary" size="medium" @click="handleShowIDOModel" round :disabled="true">
-            {{ t('message.index.IDO.join') }}
-          </el-button>
+        <div class="tabs-wrapper">
+          <el-tabs v-model="active">
+            <el-tab-pane label="ACY" name="ACY">
+              <img class="IDO-banner" src="./ACY-IDO.png" />
+              <p v-html="t('message.index.IDO.ACYdesc')"></p>
+              <div class="join">
+                <el-button type="primary" size="medium" @click="handleShowACYIDOModel" round>
+                  {{ t('message.index.IDO.join') }}
+                </el-button>
+              </div>
+            </el-tab-pane>
+            <el-tab-pane label="CYN" name="CYN">
+              <img class="IDO-banner" src="./cycan-IDO.png" />
+              <p v-html="t('message.index.IDO.CYNdesc')"></p>
+              <div class="join">
+                <el-button
+                  type="primary"
+                  size="medium"
+                  @click="handleShowCYNIDOModel"
+                  round
+                  :disabled="true"
+                >
+                  {{ t('message.index.IDO.joinEnded') }}
+                </el-button>
+              </div>
+            </el-tab-pane>
+          </el-tabs>
         </div>
       </div>
       <div class="activity-wrapper" id="activity">
@@ -78,7 +99,8 @@
     </div>
   </div>
   <AirdropModel ref="airdropModel" />
-  <IDOModel ref="IODModel" />
+  <CYNIDOModel ref="CYNIDOModelRef" />
+  <ACYIDOModel ref="ACYIDOModelRef" />
 </template>
 
 <script lang="ts">
@@ -86,8 +108,10 @@ import { defineComponent, ref } from 'vue'
 import { LOCALES } from '../../i18n/index'
 import AirdropModel from './airdrop-model/airdrop-model.vue'
 import type { AirdropModelApi } from './airdrop-model/airdrop-model.vue'
-import IDOModel from './IDO-model/IDO-model.vue'
-import type { IDOModelApi } from './IDO-model/IDO-model.vue'
+import CYNIDOModel from './CYN-IDO-model/CYN-IDO-model.vue'
+import type { CYNIDOModelApi } from './CYN-IDO-model/CYN-IDO-model.vue'
+import ACYIDOModel from './ACY-IDO-model/ACY-IDO-model.vue'
+import type { ACYIDOModelApi } from './ACY-IDO-model/ACY-IDO-model.vue'
 import Tokenomics from '@/components/tokenomics/tokenomics.vue'
 import { TABS as tabList, LOTTERYS as lotterys, VIDEOS as videos } from '../../config/index'
 import { useI18n } from 'vue-i18n'
@@ -97,7 +121,8 @@ export default defineComponent({
   components: {
     Tokenomics,
     AirdropModel,
-    IDOModel
+    CYNIDOModel,
+    ACYIDOModel
   },
   setup() {
     const { t, locale } = useI18n()
@@ -105,13 +130,19 @@ export default defineComponent({
 
     const tabs = ref(tabList)
     const airdropModel = ref<AirdropModelApi>()
-    const IODModel = ref<IDOModelApi>()
+    const CYNIDOModelRef = ref<CYNIDOModelApi>()
+    const ACYIDOModelRef = ref<ACYIDOModelApi>()
+
+    const active = ref<string>('ACY')
 
     const handleShowAirdropModel = () => {
       airdropModel.value?.changeAirdropModelDisplay()
     }
-    const handleShowIDOModel = () => {
-      IODModel.value?.changeIDOModelDisplay()
+    const handleShowCYNIDOModel = () => {
+      CYNIDOModelRef.value?.changeIDOModelDisplay()
+    }
+    const handleShowACYIDOModel = () => {
+      ACYIDOModelRef.value?.changeIDOModelDisplay()
     }
 
     const toLotteryResult = (i: number) => {
@@ -130,15 +161,19 @@ export default defineComponent({
       videos,
       lotterys,
 
+      active,
+
       locale,
 
       airdropModel,
-      IODModel,
+      CYNIDOModelRef,
+      ACYIDOModelRef,
 
       t,
       toLotteryResult,
       handleShowAirdropModel,
-      handleShowIDOModel,
+      handleShowCYNIDOModel,
+      handleShowACYIDOModel,
 
       LOCALES
     }
@@ -198,10 +233,14 @@ export default defineComponent({
     .IDO {
       background: rgba($color: #aea5f3, $alpha: 0.09);
       padding-bottom: 55px;
+      .tabs-wrapper {
+        max-width: 1024px;
+        margin: 0 auto;
+      }
       .IDO-banner {
         display: block;
-        margin: 100px auto 140px auto;
-        height: 149px;
+        margin: 42px auto;
+        height: 49px;
         width: auto;
       }
       p {

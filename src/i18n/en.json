@@ -20,8 +20,10 @@
       "understandingHippo": "Understanding Hippo within one minute"
     },
     "IDO": {
-      "desc": "Cycan Network HDO<br/><br/>Cycan Network, our main chain, is launching its HDO now on Hippo HDO platform.<br/><br/>There are a total of 20,000 IQTs (IDO Qualification Tickets).<br/><br/>Out of these：<br/><br/>3,500 IQTs were won through a random lottery. <br/><br/>500 IQTs reserved for early contributors, volunteers and active members within the Cycan Network community.<br/><br/>1,000 IQTs were obtained in exchange for HIPS.<br/><br/>15,000 IQTs were obtained via public burning of the HIP token.<br/><br/>IQT Smart Contract Address:<br/>0x93d2fDF858Ef4Dce8EC5b011CC6C6057e706E17A<br/><br/>CYN Smart Contract Address:<br/> 0x8BAc919fBca13d67e9f901BF41537931effF0E7D<br/><br/>The IQTs have been sent to the winners’ addresses. <br/><br/>Please check from the winning list:<br/><a href='https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0' target='_blank'>https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0</a><br/><br/>With each IQT, you can swap 100 CYN (Cycan Network) tokens for 10 BUSD/USDT (0.10 BUSD/USDT per CYN token).<br/><br/>Lottery winners can only use BUSD or USDT(BEP20) to swap CYN tokens.<br/><br/>Please tap the “Join CYN HDO” to swap for CYN：",
-      "join": "Swap Ended"
+      "CYNdesc": "Cycan Network HDO<br/><br/>Cycan Network, our main chain, is launching its HDO now on Hippo HDO platform.<br/><br/>There are a total of 20,000 IQTs (IDO Qualification Tickets).<br/><br/>Out of these：<br/><br/>3,500 IQTs were won through a random lottery. <br/><br/>500 IQTs reserved for early contributors, volunteers and active members within the Cycan Network community.<br/><br/>1,000 IQTs were obtained in exchange for HIPS.<br/><br/>15,000 IQTs were obtained via public burning of the HIP token.<br/><br/>IQT Smart Contract Address:<br/>0x93d2fDF858Ef4Dce8EC5b011CC6C6057e706E17A<br/><br/>CYN Smart Contract Address:<br/> 0x8BAc919fBca13d67e9f901BF41537931effF0E7D<br/><br/>The IQTs have been sent to the winners’ addresses. <br/><br/>Please check from the winning list:<br/><a href='https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0' target='_blank'>https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0</a><br/><br/>With each IQT, you can swap 100 CYN (Cycan Network) tokens for 10 BUSD/USDT (0.10 BUSD/USDT per CYN token).<br/><br/>Lottery winners can only use BUSD or USDT(BEP20) to swap CYN tokens.<br/><br/>Please tap the “Join CYN HDO” to swap for CYN：",
+      "ACYdesc": "ACY Finance HDO<br/><br/>ACY Finance, is launching its HDO now on Hippo HDO platform.<br/><br/>There are a total of 4,500 HQTs (HDO Qualification Tickets).<br/><br/>Out of these：<br/><br/>3,420 HQT were won in Twitter events;<br/><br/>1,080 HQT were won via Chinese MaiZi community eventss;<br/><br/>ACY_HQT Smart Contract Address(Polygon):<br/>0x433c3d5ee2fae7aae3aa67ea9702d8fc806f4786<br/><br/>ACY Smart Contract Address(Polygon):<br/> 0x8b1f836491903743fE51ACd13f2CC8Ab95b270f6<br/><br/>The HQTs have been sent to the winners’ addresses.<br/><br/>Please check from the winning list:<br/><a href='https://cycannetwork.medium.com/acy-hdo-results-overview-6a31808d17dc' target='_blank'>https://cycannetwork.medium.com/acy-hdo-results-overview-6a31808d17dc</a><br/><br/>With each HQT, you can swap 200 ACY tokens for 5 USDT (0.025 USDT per ACY token).<br/><br/>Lottery winners can only use USDT(Polygon) to swap ACY tokens.<br/><br/>Please tap the “Join ACY HDO” to swap for ACY：<br/><br/>ACY Finance is an anti-robot DEX. ACY invents Flash Arbitrage, a protocol level implementation that executes to reduce the arbitrage activities of miners and other kinds of arbitrage robots in each transaction.<br/><br/>Web：<a href='https://acy.finance/' target='_blank'>https://acy.finance/</a><br/>ACY DEX Public Test Beta：<a href='https://test.acy.finance/' target='_blank'>https://test.acy.finance/</a>",
+      "join": "Swap",
+      "joinEnded": "Swap Ended"
     },
     "activity": {
       "title": "AirDrops",
@@ -59,12 +61,11 @@
       "tips04": ", further airdrop info will be released before 30th June."
     },
     "IDOModel": {
-      "BSCAddress": "BSC Address",
-      "IQTBanlace": "IQT Banlace",
-      "CYNBanlace": "CYN Banlace :",
-      "swapQuantity": "Swap CYN Amount <br/> (Min. 100 CYN)",
+      "Address": "Address",
+      "Banlace": "{token} Banlace",
+      "swapQuantity": "Swap {token} Amount <br/> (Min. {min} {token})",
       "maxQuantity": "Max",
-      "swapCYN": "Swap CYN",
+      "swapToken": "Swap {token}",
       "placeholder": "Input Swap Amount",
       "approve": "Approve",
       "approved": "Approved",

@@ -1,5 +1,10 @@
 import Web3 from 'web3'
-import { BSCSCAN_PRC_URL } from './const'
-export default function getNotAccountWeb3(): Web3 {
-  return new Web3(BSCSCAN_PRC_URL ?? 'https://bsc-dataseed.binance.org')
+import { PRC_URLS, ChainIds } from '../ts/const'
+
+export default function getNotAccountWeb3(chainId: ChainIds): Web3 {
+  const rpc = PRC_URLS[chainId]
+  if (!rpc) {
+    throw new Error('')
+  }
+  return new Web3(rpc)
 }

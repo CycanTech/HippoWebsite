@@ -2,7 +2,7 @@
   <popup v-model="showModel">
     <div class="IDO-model-wrapper">
       <div class="IDO-model-content">
-        <div class="BSCAddress">{{ t('message.index.IDOModel.BSCAddress') }}</div>
+        <div class="BSCAddress">BSC {{ t('message.index.IDOModel.Address') }}</div>
         <div class="address-connect">
           <div class="account">
             <span v-if="isConnected">{{ shortenAddress(userAccount, 7) }}</span>
@@ -26,7 +26,7 @@
         </div>
         <div class="banlace">
           <div class="title">
-            {{ t('message.index.IDOModel.IQTBanlace') }}
+            {{ t('message.index.IDOModel.Banlace', { token: 'IQT' }) }}
           </div>
           <div class="IQT-banlace">
             <i class="el-icon-loading" v-if="isLoadingIQT"></i>
@@ -53,7 +53,9 @@
         </div>
         <div class="swap-number">
           <div class="tips">
-            <div v-html="t('message.index.IDOModel.swapQuantity')"></div>
+            <div
+              v-html="t('message.index.IDOModel.swapQuantity', { min: 100, token: 'CYN' })"
+            ></div>
             <div class="max-quantity">
               <span> {{ t('message.index.IDOModel.maxQuantity') }}</span>
               <span class="quantity">
@@ -72,7 +74,7 @@
           </div>
         </div>
         <div class="CYN-banlace">
-          <span>{{ t('message.index.IDOModel.CYNBanlace') }}</span>
+          <span>{{ t('message.index.IDOModel.Banlace', { token: 'CYN' }) }}:</span>
           <span class="amount">
             {{ CYNBanlaceAmount ? amountToDecimal(formatAmount(CYNBanlaceAmount)) : '-' }}
           </span>
@@ -159,7 +161,7 @@
             type="primary"
             size="medium"
           >
-            {{ t('message.index.IDOModel.swapCYN') }}
+            {{ t('message.index.IDOModel.swapToken', { token: 'CYN' }) }}
           </el-button>
         </div>
         <div class="bottom-tips" v-if="isInsufficientStablecoinBanlace || isInsufficientIQTBanlace">
@@ -183,7 +185,7 @@ import getProvider from '@/common/ts/getProvider'
 import getWeb3 from '@/common/ts/getWeb3'
 import getBalance from '@/common/ts/getBalance'
 import Popup from '@/components/popup/popup.vue'
-import { IQT_TOKEN_ADDRESS, IOD_SWAP_ADDRESS, ZERO, CYN_ADDRESS } from '@/common/ts/const'
+import { IQT_TOKEN_ADDRESS, IOD_SWAP_ADDRESS, ZERO, CYN_ADDRESS, ChainIds } from '@/common/ts/const'
 import { abi as IDOSwapABI } from '@/abi/IDOSwap.json'
 import { useI18n } from 'vue-i18n'
 import JSBI from 'jsbi'
@@ -199,7 +201,7 @@ stablecoins.map(item => {
   stablecoinLabels[item.value] = item.label
 })
 
-export interface IDOModelApi {
+export interface CYNIDOModelApi {
   changeIDOModelDisplay: () => void
 }
 
@@ -214,6 +216,7 @@ export default defineComponent({
 
     const showModel = ref(false)
     const userAccount = ref<string>()
+    const curChainId = ref<ChainIds>()
     const isConnected = computed(() => userAccount.value !== undefined)
     const isConnecting = ref(false)
     const isLoadingIQT = ref(false)
@@ -303,51 +306,53 @@ export default defineComponent({
       }
     }
     const _getIQTBanlace = async () => {
-      if (!userAccount.value) {
+      if (!userAccount.value || !curChainId.value) {
         return
       }
       isLoadingIQT.value = true
-      const banlace = await getBalance(IQT_TOKEN_ADDRESS, userAccount.value)
+      const banlace = await getBalance(IQT_TOKEN_ADDRESS, userAccount.value, curChainId.value)
       IQTBanlace.value = JSBI.BigInt(banlace)
       isLoadingIQT.value = false
     }
     const _getStablecoinBanlace = async () => {
-      if (!userAccount.value) {
+      if (!userAccount.value || !curChainId.value) {
         return
       }
       isLoadingStablecoin.value = true
-      const banlace = await getBalance(stablecoin.value, userAccount.value)
+      const banlace = await getBalance(stablecoin.value, userAccount.value, curChainId.value)
       stablecoinBanlace.value = JSBI.BigInt(banlace)
       isLoadingStablecoin.value = false
     }
     const _getCYNBanlaceAmount = async () => {
-      if (!userAccount.value) {
+      if (!userAccount.value || !curChainId.value) {
         return
       }
-      const banlace = await getBalance(CYN_ADDRESS, userAccount.value)
+      const banlace = await getBalance(CYN_ADDRESS, userAccount.value, curChainId.value)
       CYNBanlaceAmount.value = JSBI.BigInt(banlace)
     }
     const _getIQTApproved = async () => {
-      if (!userAccount.value) {
+      if (!userAccount.value || !curChainId.value) {
         return
       }
       isLoadingIQTApprove.value = true
       isIQTApproved.value = await getApproved(
         IQT_TOKEN_ADDRESS,
         IOD_SWAP_ADDRESS,
-        userAccount.value
+        userAccount.value,
+        curChainId.value
       )
       isLoadingIQTApprove.value = false
     }
     const _getStablecoinApproved = async () => {
-      if (!userAccount.value) {
+      if (!userAccount.value || !curChainId.value) {
         return
       }
       isLoadingStablecoinApprove.value = true
       isStablecoinApproved.value = await getApproved(
         stablecoin.value,
         IOD_SWAP_ADDRESS,
-        userAccount.value
+        userAccount.value,
+        curChainId.value
       )
       isLoadingStablecoinApprove.value = false
     }
@@ -378,6 +383,16 @@ export default defineComponent({
         })
         return
       }
+
+      const chainId = Number(
+        provider.networkVersion
+          ? provider.networkVersion
+          : provider.chainId
+          ? provider.chainId.toString()
+          : undefined
+      )
+
+      curChainId.value = chainId
       isConnecting.value = true
       const [address] = (await provider.enable()) as string[]
       isConnecting.value = false

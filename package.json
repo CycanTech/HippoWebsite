@@ -8,7 +8,6 @@
     "serve:development": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build --mode production",
     "build:testnet": "vue-cli-service build --mode testnet",
-    "build:development": "vue-cli-service build --mode development",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

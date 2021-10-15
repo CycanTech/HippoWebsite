@@ -13,5 +13,18 @@ export const IQT_TOKEN_ADDRESS = '0x93d2fDF858Ef4Dce8EC5b011CC6C6057e706E17A'
 export const CYN_ADDRESS = '0x8BAc919fBca13d67e9f901BF41537931effF0E7D'
 export const IOD_SWAP_ADDRESS = '0x5574B4c759A5e1E1B7C581fb80eD966748b30bB2'
 
+export const HQT_TOKEN_ADDRESS = '0x433c3d5ee2fae7aae3aa67ea9702d8fc806f4786'
+export const ACY_ADDRESS = '0x8b1f836491903743fE51ACd13f2CC8Ab95b270f6'
+export const ACY_IOD_SWAP_ADDRESS = '0x8b1f836491903743fE51ACd13f2CC8Ab95b270f6'
+
 export const ZERO = JSBI.BigInt('0')
 
+export enum ChainIds {
+  BSC = 56,
+  MATIC = 137
+}
+
+export const PRC_URLS: { [chainId in ChainIds]: string } = {
+  [ChainIds.BSC]: 'https://bsc-dataseed.binance.org',
+  [ChainIds.MATIC]: 'https://rpc-mainnet.maticvigil.com'
+}

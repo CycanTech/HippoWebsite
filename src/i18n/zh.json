@@ -1,86 +1,87 @@
 {
-  "tokenomics": "代 币 分 配",
-  "connectWallet": "连接钱包",
-  "PlsConnect": "请连接您的钱包",
-  "disconnect": "断开连接",
+  "tokenomics": "代 幣 分 配",
+  "connectWallet": "連接錢包",
+  "PlsConnect": "請連接您的錢包",
+  "disconnect": "斷開連接",
   "header": {
     "menu": {
-      "desc": "HIPPO介绍",
-      "rank": "持币人排名",
-      "contact": "联系我们",
-      "whitepaper": "白皮书",
-      "HIPPOStaking": "HIP 流动性挖矿",
-      "document": "文档"
+      "desc": "HIPPO介紹",
+      "rank": "持幣人排名",
+      "contact": "聯系我們",
+      "whitepaper": "白皮書",
+      "HIPPOStaking": "HIP 流動性挖礦",
+      "document": "文檔"
     }
   },
   "index": {
     "introduce": {
-      "title": "什么是HIPPO?",
-      "desc": "Hippo（HIP）是一场彻底的去中心化社区实验，目标是构造一个完全由社区驱动的DAO组织。无团队份额、无私募，70%全部分散空投给社区，5%根据贡献发放给社区志愿者，25%用于创设初始交易流动池并销毁私钥。<br/><br/>HIP是一张奖券，每天都有几率获得Cycan生态各类代币空投；<br/><br/>HIP是Hippo社区的治理代币，社区管理逐步实现完全的DAO。<br/><br/>Hippo是一个去中心化的NFT市场，HIP作为手续费直接被燃烧销毁。<br/><br/>Hippo是一个代币分发平台，根据社区喜好选择合适的项目在社区空投或发起IDO。<br/><br/>Hippo一切权利归于社区，未来在哪里由社区决定，谁都无法主宰这个项目，将拥有无限可能性。<br/><br/>HIP由Cycan network发起，Cycan定位于跨链去中心化资产管理平台，是一个完整的DEFI和NFT基础设施，未来将成为Polkadot的平行链，所有基于Cycan主网的生态项目都将向HIP的持有人空投。<br/><br/>HIPPO(HIP) BSC合约地址：<br/>0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b",
-      "understandingHippo": "一分钟了解Hippo"
+      "title": "什麽是HIPPO?",
+      "desc": "Hippo（HIP）是一場徹底的去中心化社區實驗，目標是構造一個完全由社區驅動的DAO組織。無團隊份額、無私募，70%全部分散空投給社區，5%根據貢獻發放給社區誌願者，25%用於創設初始交易流動池並銷毀私鑰。<br/><br/>HIP是一張獎券，每天都有幾率獲得Cycan生態各類代幣空投；<br/><br/>HIP是Hippo社區的治理代幣，社區管理逐步實現完全的DAO。<br/><br/>Hippo是一個去中心化的NFT市場，HIP作為手續費直接被燃燒銷毀。<br/><br/>Hippo是一個代幣分發平臺，根據社區喜好選擇合適的項目在社區空投或發起IDO。<br/><br/>Hippo一切權利歸於社區，未來在哪裏由社區決定，誰都無法主宰這個項目，將擁有無限可能性。<br/><br/>HIP由Cycan network發起，Cycan定位於跨鏈去中心化資產管理平臺，是一個完整的DEFI和NFT基礎設施，未來將成為Polkadot的平行鏈，所有基於Cycan主網的生態項目都將向HIP的持有人空投。<br/><br/>HIPPO(HIP) BSC合約地址：<br/>0xe6ffa2e574a8bbeb5243d2109b6b11d4a459f88b",
+      "understandingHippo": "一分鐘了解Hippo"
     },
     "IDO": {
-      "desc": "关于Cycan主网在Hippo HDO平台的兑换<br/><br/>本轮总计20,000个IQT（HDO资格代币）<br/><br/>其中:<br/>3,500个IQT 以抽奖形式发放给HIP持币用户；<br/>500个IQT 作为Cycan社区激励发放；<br/>1,000个IQT 通过HIPS兑换获得；<br/>15,000 个IQT 通过社区公开销毁HIP代币获得。<br/><br/>IQT合约地址：0x93d2fDF858Ef4Dce8EC5b011CC6C6057e706E17A<br/><br/>CYN合约地址：0x8BAc919fBca13d67e9f901BF41537931effF0E7D<br/><br/>IQT抽奖已完成，开奖结果请点击抽奖结果查看:<br/><br/><a href='https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0' target='_blank'>https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0</a><br/><br/>每个IQT将获得使用10 BUSD/USDT（BEP20）兑换100个CYN的权益（1CYN兑率为0.1 BUSD/USDT）。<br/><br/>IQT中奖者仅可使用BUSD或USDT（BEP20）兑换CYN。<br/><br/>如您已中奖，请点击页面下方“参与CYN HDO”进行CYN兑换：",
-      "join": "兑换已截止"
+      "CYNdesc": "關於Cycan主網在Hippo HDO平臺的兌換<br/><br/>本輪總計20,000個IQT（HDO資格代幣）<br/><br/>其中:<br/>3,500個IQT 以抽獎形式發放給HIP持幣用戶；<br/>500個IQT 作為Cycan社區激勵發放；<br/>1,000個IQT 通過HIPS兌換獲得；<br/>15,000 個IQT 通過社區公開銷毀HIP代幣獲得。<br/><br/>IQT合約地址：0x93d2fDF858Ef4Dce8EC5b011CC6C6057e706E17A<br/><br/>CYN合約地址：0x8BAc919fBca13d67e9f901BF41537931effF0E7D<br/><br/>IQT抽獎已完成，開獎結果請點擊抽獎結果查看:<br/><br/><a href='https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0' target='_blank'>https://docs.google.com/spreadsheets/d/1eV3ATxw692013NBbRr17MPG8HOjhQcOMOqPXIFTUkFQ/edit#gid=0</a><br/><br/>每個IQT將獲得使用10 BUSD/USDT（BEP20）兌換100個CYN的權益（1CYN兌率為0.1 BUSD/USDT）。<br/><br/>IQT中獎者僅可使用BUSD或USDT（BEP20）兌換CYN。<br/><br/>如您已中獎，請點擊頁面下方「參與CYN HDO」進行CYN兌換：",
+      "ACYdesc": "關於ACY_Polygon 代幣在 Hippo HDO平臺的兌換<br/><br/>本輪總計4,500個HQT（HDO資格代幣）<br/><br/>其中:<br/>3,420個HQT推特活動發放;<br/>1,080個HQT中文麥子社區活動發放；<br/><br/>ACY_HQT合約地址(Polygon)：0x433c3d5ee2fae7aae3aa67ea9702d8fc806f4786<br/><br/>ACY合約地址(Polygon)：0x8b1f836491903743fE51ACd13f2CC8Ab95b270f6<br/><br/>HQT抽獎已完成，開獎結果請點擊抽獎結果查看:<br/><br/><a href='https://cycannetwork.medium.com/acy-hdo-results-overview-6a31808d17dc' target='_blank'>https://cycannetwork.medium.com/acy-hdo-results-overview-6a31808d17dc</a><br/><br/>每個HQT將獲得使用5 USDT（Polygon）兌換200個ACY的權益（1 ACY兌率為0.025 USDT）。<br/><br/>HQT中獎者僅可使用USDT（Polygon）兌換ACY。<br/><br/>如您已中獎，請點擊頁面下方「參與ACY HDO」進行ACY兌換：<br/><br/>ACY Finance 是一個反機器人的DEX。 ACY 發明了閃電套利（Flash Arbitrage），這是一種協議級實現，用於減少礦工和其他類型的套利機器人在每筆交易中的套利活動。<br/><br/>網址：<a href='https://acy.finance/' target='_blank'>https://acy.finance/</a><br/>DEX 測試版本：<a href='https://test.acy.finance/' target='_blank'>https://test.acy.finance/</a>",
+      "join": "兌換",
+      "joinEnded": "兌換已截止"
     },
     "activity": {
-      "title": "空投活动",
-      "checkClaim": "查验/领取",
-      "airdropClaimEnded": "空投领取已截止"
+      "title": "空投活動",
+      "checkClaim": "查驗/領取",
+      "airdropClaimEnded": "空投領取已截止"
     },
     "rankHolders": {
-      "title": "持币人排名",
+      "title": "持幣人排名",
       "search": "搜索",
       "placeholder": "搜索地址",
-      "accountAddress": "账户地址",
-      "getTime": "获得时间",
-      "getAirdrop": "获得空投",
-      "totalHoldings": "总持有量",
+      "accountAddress": "賬戶地址",
+      "getTime": "獲得時間",
+      "getAirdrop": "獲得空投",
+      "totalHoldings": "總持有量",
       "ratio": "比率"
     },
     "luckyDraw": {
-      "title": "抽奖活动",
+      "title": "抽獎活動",
       "label": "第{lotteryPeriod}期",
-      "lotteryResult": "查看抽奖结果"
+      "lotteryResult": "查看抽獎結果"
     },
     "checkClaimModel": {
-      "title": "查验/领取",
-      "receiveAirdrop": "领取空投",
-      "result": "查验结果 :",
-      "inWhitelist": "该地址已参与本期空投",
-      "airdropped": "该地址已领取空投",
-      "notAirdropped": "该地址未参与本期空投",
-      "failedConnect": "连接钱包失败",
-      "tipsTitle": "不在白名单里面？ 没关系，您可以通过下面两种方式参与：",
+      "title": "查驗/領取",
+      "receiveAirdrop": "領取空投",
+      "result": "查驗結果 :",
+      "inWhitelist": "該地址已參與本期空投",
+      "airdropped": "該地址已領取空投",
+      "notAirdropped": "該地址未參與本期空投",
+      "failedConnect": "連接錢包失敗",
+      "tipsTitle": "不在白名單裏面？ 沒關系，您可以通過下面兩種方式參與：",
       "tips01": "1. 前往 ",
-      "tips02": " 兑换HIP-USDT",
-      "tips03": "2. 关注我们的 ",
-      "tips04": "，在6月30日前会不定期发布空投资讯"
+      "tips02": " 兌換HIP-USDT",
+      "tips03": "2. 關註我們的 ",
+      "tips04": "，在6月30日前會不定期發布空投資訊"
     },
     "IDOModel": {
-      "BSCAddress": "BSC钱包地址",
-      "IQTBanlace": "IQT 余额",
-      "CYNBanlace": "CYN 余额：",
-      "swapQuantity": "兑换CYN数量<br>(最少100CYN)",
-      "maxQuantity": "最多可兑换：",
-      "swapCYN": "兑换CYN",
-      "placeholder": "请输入兑换数量",
-      "approve": "授权",
-      "approved": "已授权",
-      "approveSuccess": "授权成功",
-      "approveFailed": "授权失败",
-      "insufficient": "余额不足",
-      "swapSuccess": "兑换成功",
-      "paymentCurrency": "兑换币种",
-      "swap": "兑入",
-      "for": "兑出"
+      "Address": "錢包地址",
+      "Banlace": "{token} 余額",
+      "swapQuantity": "兌換{token}數量<br>(最少{min}{token})",
+      "maxQuantity": "最多可兌換：",
+      "swapToken": "兌換 {token}",
+      "placeholder": "請輸入兌換數量",
+      "approve": "授權",
+      "approved": "已授權",
+      "approveSuccess": "授權成功",
+      "approveFailed": "授權失敗",
+      "insufficient": "余額不足",
+      "swapSuccess": "兌換成功",
+      "paymentCurrency": "兌換幣種",
+      "swap": "兌入",
+      "for": "兌出"
     }
   },
   "lotteryResult": {
-    "title": "抽奖活动",
-    "lotteryPeriod": "期数：",
-    "lotteryTime": "抽奖时间：",
-    "lotteryBlock": "抽奖块高度：",
-    "checkWinningResults": "查看中奖结果"
+    "title": "抽獎活動",
+    "lotteryPeriod": "期數：",
+    "lotteryTime": "抽獎時間：",
+    "lotteryBlock": "抽獎塊高度：",
+    "checkWinningResults": "查看中獎結果"
   }
 }

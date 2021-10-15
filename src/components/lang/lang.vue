@@ -30,7 +30,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 const M_LANGUAGE = 'M_LANGUAGE'
 const langs = [
-  { text: '中文', lang: ROUTER_LOCALES[LOCALES.ZH] },
+  { text: '繁體中文', lang: ROUTER_LOCALES[LOCALES.ZH] },
   { text: 'English', lang: ROUTER_LOCALES[LOCALES.EN] }
 ]
 
