@@ -188,19 +188,18 @@ import {
   ACY_IOD_SWAP_ADDRESS,
   ZERO,
   ACY_ADDRESS,
+  MUSDT_ADDRESS,
   ChainIds
 } from '@/common/ts/const'
-import { abi as IDOSwapABI } from '@/abi/IDOSwap.json'
+import { abi as IDOSwapABI } from '@/abi/ACYswap.json'
 import { useI18n } from 'vue-i18n'
 import JSBI from 'jsbi'
 import getApproved from '@/common/ts/getApproved'
 import approve from '@/common/ts/approve'
 
-const stablecoins = [{ value: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f', label: 'USDT' }]
+const stablecoins = [{ value: MUSDT_ADDRESS, label: 'USDT' }]
 const stablecoinLabels: { [key: string]: string } = {}
-stablecoins.map(item => {
-  stablecoinLabels[item.value] = item.label
-})
+stablecoins.forEach(item => (stablecoinLabels[item.value] = item.label))
 
 export interface ACYIDOModelApi {
   changeIDOModelDisplay: () => void
@@ -428,10 +427,7 @@ export default defineComponent({
       }
       const { stablecoinAmount } = parsedStablecoinAndHQTAmounts.value
       const contract = getContract(IDOSwapABI, ACY_IOD_SWAP_ADDRESS, getWeb3())
-      const isUSDT = stablecoin.value === stablecoins[0].value
-      const swap = contract.methods[isUSDT ? 'swapUsdtAndHQTForACY' : 'swapBusdAndHQTForACY'](
-        stablecoinAmount.toString()
-      )
+      const swap = contract.methods.swapUsdtAndHqtForAcy(stablecoinAmount.toString())
       const loading = ElLoading.service({ fullscreen: true, background: 'rgba(0,0,0 0.7)' })
       try {
         await swap.send({ from: userAccount.value })

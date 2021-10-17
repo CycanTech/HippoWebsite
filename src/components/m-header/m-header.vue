@@ -9,7 +9,7 @@
           {{ t('message.header.menu.desc') }}
         </div>
         <div class="nav" @click="scrollToControl('IDO')">
-          Cycan HDO
+          Hippo HDO
         </div>
         <div class="nav">
           <a :href="whitepapers[locale]" target="_blank">
@@ -52,7 +52,7 @@
             {{ t('message.header.menu.desc') }}
           </div>
           <div class="nav" @click="scrollToControl('IDO')">
-             Cycan HDO
+             Hippo HDO
           </div>
           <div class="nav">
             <a :href="whitepapers[locale]" target="_blank">

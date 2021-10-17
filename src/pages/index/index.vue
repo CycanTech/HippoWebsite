@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="IDO" id="IDO">
-        <h1>Cycan HDO</h1>
+        <h1>Hippo HDO</h1>
         <div class="tabs-wrapper">
           <el-tabs v-model="active">
             <el-tab-pane label="ACY" name="ACY">
