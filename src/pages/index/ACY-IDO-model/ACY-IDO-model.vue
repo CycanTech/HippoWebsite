@@ -47,7 +47,7 @@
             </el-select>
             <div class="stablecoin">
               <i class="el-icon-loading" v-if="isLoadingStablecoin"></i>
-              {{ stablecoinBanlace ? amountToDecimal(formatAmount(stablecoinBanlace)) : '-' }}
+              {{ stablecoinBanlace ? amountToDecimal(formatAmount(stablecoinBanlace, 6)) : '-' }}
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@
                 {{
                   parsedStablecoinAndHQTAmounts?.stablecoinAmount
                     ? amountToDecimal(
-                        formatAmount(parsedStablecoinAndHQTAmounts.stablecoinAmount.toString())
+                        formatAmount(parsedStablecoinAndHQTAmounts.stablecoinAmount.toString(), 6)
                       )
                     : '-'
                 }}
@@ -215,7 +215,7 @@ export default defineComponent({
     const { t } = useI18n()
 
     const showModel = ref(false)
-    const userAccount = ref<string>()
+    const userAccount = ref<string | undefined>()
     const curChainId = ref<ChainIds>()
     const isConnected = computed(() => userAccount.value !== undefined)
     const isConnecting = ref(false)
@@ -257,7 +257,7 @@ export default defineComponent({
       //   return undefined
       // }
       return {
-        stablecoinAmount,
+        stablecoinAmount: JSBI.divide(stablecoinAmount, JSBI.BigInt('1000000000000')),
         HQTAmount
       }
     })
