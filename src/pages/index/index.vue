@@ -26,8 +26,9 @@
               <img class="IDO-banner" src="./ACY-IDO.png" />
               <p v-html="t('message.index.IDO.ACYdesc')"></p>
               <div class="join">
-                <el-button type="primary" size="medium" @click="handleShowACYIDOModel" round>
-                  {{ t('message.index.IDO.join') }}
+                <el-button type="primary" size="medium" @click="handleShowACYIDOModel"
+                  :disabled="true" round>
+                  {{ t('message.index.IDO.joinEnded') }}
                 </el-button>
               </div>
             </el-tab-pane>
